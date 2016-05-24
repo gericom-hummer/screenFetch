@@ -53,7 +53,9 @@ command! This script is very easy to add to and can easily be extended.
 
 ### FreeBSD
 
-1. screenfetch can be installed by using the ports system.
+Install screenfetch using the [ports](https://freshports.org/sysutils/screenfetch/) system: `cd /usr/ports/sysutils/screenfetch/ && make install clean`
+Install screenfetch as a binary package: `pkg install screenFetch`
+If screenfetch doesn't work as expected, try to (re-)install bash: `cd /usr/ports/shells/bash/ && make install clean` or `pkg install bash`
 
 ### Fedora (21 or later)
 
