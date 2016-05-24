@@ -2,7 +2,7 @@
 
 # screenFetch - a CLI Bash script to show system/theme info in screenshots
 
-# Copyright (c) 2010-2015 Brett Bohnenkamper <kittykatt@kittykatt.us>
+# Copyright (c) 2010-2016 Brett Bohnenkamper <kittykatt@kittykatt.us>
 
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -23,16 +23,16 @@
 # to put forth suggestions/ideas. Thank you.
 
 # Requires: bash 4.0+
-# Optional dependencies: 	xorg-xdpyinfo (resoluton detection)
-#						scrot (screenshot taking)
-#						curl (screenshot uploading)
+# Optional dependencies: xorg-xdpyinfo (resoluton detection)
+#                        scrot (screenshot taking)
+#                        curl (screenshot uploading)
 
 
 LANG=C
 LANGUAGE=C
 LC_ALL=C
 
-scriptVersion="3.6.8"
+scriptVersion="3.7.0"
 
 ######################
 # Settings for fetcher
@@ -56,15 +56,15 @@ display_logo="no"
 
 # WM & DE process names
 # Removed WM's: compiz
-wmnames=( fluxbox openbox blackbox xfwm4 metacity kwin icewm pekwm fvwm dwm awesome wmaker stumpwm musca xmonad.* i3 ratpoison scrotwm spectrwm wmfs wmii beryl subtle e16 enlightenment sawfish emerald monsterwm dminiwm compiz Finder herbstluftwm notion bspwm cinnamon 2bwm echinus swm budgie-wm dtwm 9wm )
-denames=( gnome-session xfce-mcs-manage xfce4-session xfconfd ksmserver lxsession gnome-settings-daemon mate-session mate-settings-daemon Finder )
+wmnames=( fluxbox openbox blackbox xfwm4 metacity kwin twin icewm pekwm flwm flwm_topside fvwm dwm awesome wmaker stumpwm musca xmonad.* i3 ratpoison scrotwm spectrwm wmfs wmii beryl subtle e16 enlightenment sawfish emerald monsterwm dminiwm compiz Finder herbstluftwm howm notion bspwm cinnamon 2bwm echinus swm budgie-wm dtwm 9wm chromeos-wm deepin-wm sway )
+denames=( gnome-session xfce-mcs-manage xfce4-session xfconfd ksmserver lxsession lxqt-session gnome-settings-daemon mate-session mate-settings-daemon Finder deepin )
 
 # Screenshot Settings
 # This setting lets the script know if you want to take a screenshot or not. 1=Yes 0=No
 screenshot=
 # This setting lets the script know if you want to upload the screenshot to a filehost. 1=Yes 0=No
 upload=
-# This setting lest the script know where you would like to upload the file to. Valid hosts are: teknik, mediacrush, pomf, imgur, hmp, and a configurable local.
+# This setting lets the script know where you would like to upload the file to. Valid hosts are: teknik, mediacrush, imgur, hmp, and a configurable local.
 uploadLoc=
 # You can specify a custom screenshot command here. Just uncomment and edit. Otherwise, we'll be using the default command: scrot -cd3.
 # screenCommand="scrot -cd5"
@@ -189,10 +189,10 @@ detectColors() {
 	my_hcolor=$(colorNumberToCode "${my_hcolor}")
 }
 
-supported_distros="Antergos, Arch Linux (Old and Current Logos), BLAG, CentOS, Chakra, Chapeau, CrunchBang, CRUX, Debian, Deepin, Dragora, elementary OS, Evolve OS, Fedora, Frugalware, Fuduntu, Funtoo, Gentoo, gNewSense, Jiyuu Linux, Kali Linux, KaOS, Korora, LinuxDeepin, Linux Mint, LMDE, Logos, Mageia, Mandriva/Mandrake, Manjaro, Netrunner, NixOS, openSUSE, Parabola GNU/Linux-libre, PeppermintOS, Raspbian, Red Hat Enterprise Linux, Sabayon, Scientific Linux, Slackware, Solus, TinyCore, Trisquel, Ubuntu, Viperr and Void."
-supported_other="Dragonfly/Free/Open/Net BSD, Haiku, Mac OS X and Windows+Cygwin."
-supported_dms="KDE, Gnome, Unity, Xfce, LXDE, Cinnamon, MATE, CDE and RazorQt."
-supported_wms="2bwm, 9wm, Awesome, Beryl, Blackbox, Cinnamon, Compiz, dminiwm, dwm, dtwm, E16, E17, echinus, Emerald, FluxBox, FVWM, herbstluftwm, IceWM, KWin, Metacity, monsterwm, Musca, Gala, Mutter, Muffin, Notion, OpenBox, PekWM, Ratpoison, Sawfish, ScrotWM, SpectrWM, StumpWM, subtle, WindowMaker, WMFS, wmii, Xfwm4, XMonad and i3."
+supported_distros="Alpine Linux, Antergos, Arch Linux (Old and Current Logos), BLAG, BunsenLabs, CentOS, Chakra, Chapeau, Chrome OS, Chromium OS, CrunchBang, CRUX, Debian, Deepin, Dragora, elementary OS, Evolve OS, Exherbo, Fedora, Frugalware, Fuduntu, Funtoo, Gentoo, gNewSense, Jiyuu Linux, Kali Linux, KaOS, KDE neon, Kogaion, Korora, LinuxDeepin, Linux Mint, LMDE, Logos, Mageia, Mandriva/Mandrake, Manjaro, Mer, Netrunner, NixOS, openSUSE, Oracle Linux, Parabola GNU/Linux-libre, PCLinuxOS, PeppermintOS, Qubes OS, Raspbian, Red Hat Enterprise Linux, Sabayon, SailfishOS, Scientific Linux, Slackware, Solus, SteamOS, SUSE Linux Enterprise, TinyCore, Trisquel, Ubuntu, Viperr and Void."
+supported_other="Dragonfly/Free/Open/Net BSD, Haiku, Mac OS X, Windows+Cygwin and Windows+Msys."
+supported_dms="KDE, Gnome, Unity, Xfce, LXDE, Cinnamon, MATE, Deepin, CDE, RazorQt and Trinity."
+supported_wms="2bwm, 9wm, Awesome, Beryl, Blackbox, Cinnamon, chromeos-wm, Compiz, deepin-wm, dminiwm, dwm, dtwm, E16, E17, echinus, Emerald, FluxBox, FLWM, FVWM, herbstluftwm, howm, IceWM, KWin, Metacity, monsterwm, Musca, Gala, Mutter, Muffin, Notion, OpenBox, PekWM, Ratpoison, Sawfish, ScrotWM, SpectrWM, StumpWM, subtle, sway, TWin, WindowMaker, WMFS, wmii, Xfwm4, XMonad and i3."
 
 displayHelp() {
 	printf "${underline}Usage${c0}:\n"
@@ -213,23 +213,23 @@ displayHelp() {
 	printf "${underline}Options${c0}:\n"
 	printf "   ${bold}-v${c0}                 Verbose output.\n"
 	printf "   ${bold}-o 'OPTIONS'${c0}       Allows for setting script variables on the\n"
-	printf "		      command line. Must be in the following format...\n"
-	printf "		      'OPTION1=\"OPTIONARG1\";OPTION2=\"OPTIONARG2\"'\n"
+	printf "                      command line. Must be in the following format...\n"
+	printf "                      'OPTION1=\"OPTIONARG1\";OPTION2=\"OPTIONARG2\"'\n"
 	printf "   ${bold}-d '+var;-var;var'${c0} Allows for setting what information is displayed\n"
-	printf "		      on the command line. You can add displays with +var,var. You\n"
-	printf "		      can delete displays with -var,var. Setting without + or - will\n"
-	printf "		      set display to that explicit combination. Add and delete statements\n"
-	printf "		      may be used in conjunction by placing a ; between them as so:\n"
-	printf "		      +var,var,var;-var,var.\n"
+	printf "                      on the command line. You can add displays with +var,var. You\n"
+	printf "                      can delete displays with -var,var. Setting without + or - will\n"
+	printf "                      set display to that explicit combination. Add and delete statements\n"
+	printf "                      may be used in conjunction by placing a ; between them as so:\n"
+	printf "                      +var,var,var;-var,var.\n"
 	printf "   ${bold}-n${c0}                 Do not display ASCII distribution logo.\n"
 	printf "   ${bold}-L${c0}                 Display ASCII distribution logo only.\n"
 	printf "   ${bold}-N${c0}                 Strip all color from output.\n"
 	printf "   ${bold}-t${c0}                 Truncate output based on terminal width (Experimental!).\n"
 	printf "   ${bold}-p${c0}                 Portrait output.\n"
-	printf "   ${bold}-s(u)${c0}              Using this flag tells the script that you want it\n"
-	printf "		      to take a screenshot. Use the -u flag if you would like\n"
-	printf "		      to upload the screenshots to one of the pre-configured\n"
-	printf "		      locations. These include: teknik, pomf, imgur, mediacrush, and hmp.\n"
+	printf "   ${bold}-s [-u IMGHOST]${c0}    Using this flag tells the script that you want it\n"
+	printf "                      to take a screenshot. Use the -u flag if you would like\n"
+	printf "                      to upload the screenshots to one of the pre-configured\n"
+	printf "                      locations. These include: teknik, imgur, mediacrush and hmp.\n"
 	printf "   ${bold}-c string${c0}          You may change the outputted colors with -c. The format is\n"
 	printf "                      as follows: [0-9][0-9],[0-9][0-9]. The first argument controls the\n"
 	printf "                      ASCII logo colors and the label colors. The second argument\n"
@@ -241,15 +241,15 @@ displayHelp() {
 	printf "                      See the \`asciiText\` function in the source code for more\n"
 	printf "                      informations on the variables format.\n"
 	printf "   ${bold}-S 'COMMAND'${c0}       Here you can specify a custom screenshot command for\n"
-	printf "		      the script to execute. Surrounding quotes are required.\n"
+	printf "                      the script to execute. Surrounding quotes are required.\n"
 	printf "   ${bold}-D 'DISTRO'${c0}        Here you can specify your distribution for the script\n"
-	printf "		      to use. Surrounding quotes are required.\n"
+	printf "                      to use. Surrounding quotes are required.\n"
 	printf "   ${bold}-A 'DISTRO'${c0}        Here you can specify the distribution art that you want\n"
-	printf "		      displayed. This is for when you want your distro\n"
+	printf "                      displayed. This is for when you want your distro\n"
 	printf "                      detected but want to display a different logo.\n"
 	printf "   ${bold}-E${c0}                 Suppress output of errors.\n"
-	printf "   ${bold}-V${c0}                 Display current script version.\n"
-	printf "   ${bold}-h${c0}                 Display this help.\n"
+	printf "   ${bold}-V, --version${c0}      Display current script version.\n"
+	printf "   ${bold}-h, --help${c0}         Display this help.\n"
 }
 
 
@@ -269,7 +269,7 @@ case $1 in
 	--help) displayHelp; exit 0;;
 	--version) displayVersion; exit 0;;
 esac
-		
+
 
 while getopts ":hsu:evVEnLNtlS:A:D:o:Bc:d:pa:" flags; do
 	case $flags in
@@ -350,6 +350,10 @@ detectdistro () {
 			fi
 
 			case "${distro_detect}" in
+				"CentOS"|"Chapeau"|"Deepin"|"Fedora"|"gNewSense"|"Jiyuu Linux"|"Kogaion"|"Korora"|"Mageia"|"Netrunner"|"NixOS"|"Raspbian"|"Sabayon"|"Solus"|"SteamOS"|"Trisquel"|"Ubuntu")
+					# no need to fix $distro/$distro_codename/$distro_release
+					distro="${distro_detect}"
+					;;
 				"archlinux"|"Arch Linux"|"arch"|"Arch"|"archarm")
 					distro="Arch Linux"
 					distro_release="n/a"
@@ -370,9 +374,10 @@ detectdistro () {
 					distro="Chakra"
 					distro_release=""
 					;;
-				"CentOS") distro="CentOS"
-					;;
-				"Chapeau") distro="Chapeau"
+				"BunsenLabs")
+					distro=$(source /etc/lsb-release; echo "$DISTRIB_ID")
+					distro_release=$(source /etc/lsb-release; echo "$DISTRIB_RELEASE")
+					distro_codename=$(source /etc/lsb-release; echo "$DISTRIB_CODENAME")
 					;;
 				"Debian")
 					if [[ -f /etc/crunchbang-lsb-release || -f /etc/lsb-release-crunchbang ]]; then
@@ -390,9 +395,6 @@ detectdistro () {
 						distro="Debian"
 					fi
 					;;
-				"Raspbian")
-					distro="Raspbian"
-					;;
 				"elementary"|"elementary OS")
 					distro="elementary OS"
 					;;
@@ -401,9 +403,6 @@ detectdistro () {
 					;;
 				"KaOS"|"kaos")
 					distro="KaOS"
-					;;
-				"Fedora")
-					distro="Fedora"
 					;;
 				"frugalware")
 					distro="Frugalware"
@@ -421,30 +420,19 @@ detectdistro () {
 						distro="Gentoo"
 					fi
 					;;
-				"gNewSense")
-					distro="gNewSense"
-					;;
-				"Jiyuu Linux")
-					distro="Jiyuu Linux"
-					;;
 				"LinuxDeepin")
 					distro="LinuxDeepin"
 					distro_codename=null
 					;;
-				"Deepin")
-					distro="Deepin"
-					;;
 				"Kali"|"Debian Kali Linux")
 					distro="Kali Linux"
-					;;
-				"Korora")
-					distro="Korora"
+					if [[ "${distro_codename}" =~ "kali-rolling" ]]; then
+						distro_codename="n/a"
+						distro_release="n/a"
+					fi
 					;;
 				"Lunar Linux"|"lunar")
 					distro="Lunar Linux"
-					;;
-				"Mageia")
-					distro="Mageia"
 					;;
 				"MandrivaLinux")
 					distro="Mandriva"
@@ -458,11 +446,29 @@ detectdistro () {
 				"ManjaroLinux")
 					distro="Manjaro"
 					;;
-				"Netrunner")
-					distro="Netrunner"
+				"Mer")
+					distro="Mer"
+					if [[ -f /etc/os-release ]]; then
+						if grep -q 'SailfishOS' /etc/os-release; then
+							distro="SailfishOS"
+							distro_codename="$(grep 'VERSION=' /etc/os-release | cut -d '(' -f2 | cut -d ')' -f1)"
+							distro_release="$(awk -F'=' '/^VERSION=/ {print $2}' /etc/os-release)"
+						fi
+					fi
 					;;
-				"NixOS")
-					distro="NixOS"
+				"neon"|"KDE neon")
+					distro="KDE neon"
+					distro_codename="n/a"
+					distro_release="n/a"
+					if [[ -f /etc/issue ]]; then
+						if grep -q "^KDE neon" /etc/issue ; then
+							distro_release="$(grep '^KDE neon' /etc/issue | cut -d ' ' -f3)"
+						fi
+					fi
+					;;
+				"Ol"|"ol"|"Oracle Linux")
+					distro="Oracle Linux"
+					[ -f /etc/oracle-release ] && distro_release="$(sed 's/Oracle Linux //' /etc/oracle-release)"
 					;;
 				"LinuxMint")
 					distro="Mint"
@@ -472,11 +478,26 @@ detectdistro () {
 						distro_release="n/a"
 					fi
 					;;
-				"SUSE LINUX"|"openSUSE project")
+				"openSUSE"|"openSUSE project"|"SUSE LINUX")
 					distro="openSUSE"
+					if [ -f /etc/os-release ]; then
+						if [[ "$(cat /etc/os-release)" =~ "SUSE Linux Enterprise" ]]; then
+							distro="SUSE Linux Enterprise"
+							distro_codename="n/a"
+							distro_release=$(awk -F'=' '/^VERSION_ID=/ {print $2}' /etc/os-release | tr -d '"')
+						fi
+					fi
+					if [[ "${distro_codename}" == "Tumbleweed" ]]; then
+						distro_release="n/a"
+					fi
 					;;
 				"Parabola GNU/Linux-libre"|"Parabola")
 					distro="Parabola GNU/Linux-libre"
+					distro_codename="n/a"
+					distro_release="n/a"
+					;;
+				"PCLinuxOS")
+					distro="PCLinuxOS"
 					distro_codename="n/a"
 					distro_release="n/a"
 					;;
@@ -484,34 +505,32 @@ detectdistro () {
 					distro="Peppermint"
 					distro_codename=null
 					;;
-				"CentOS")
+				"rhel")
 					distro="Red Hat Enterprise Linux"
 					;;
-				"Sabayon")
-					distro="Sabayon"
-					;;
-				"Solus")
-					distro="Solus"
-					;;
-				"Trisquel")
-					distro="Trisquel"
-					;;
-				"Ubuntu")
-					distro="Ubuntu"
+				"SailfishOS")
+					distro="SailfishOS"
+					if [[ -f /etc/os-release ]]; then
+						distro_codename="$(grep 'VERSION=' /etc/os-release | cut -d '(' -f2 | cut -d ')' -f1)"
+						distro_release="$(awk -F'=' '/^VERSION=/ {print $2}' /etc/os-release)"
+					fi
 					;;
 				"Viperr")
 					distro="Viperr"
 					distro_codename=null
 					;;
 				*)
+					if [ "x$(printf "${distro_detect}" | od -t x1 | sed -e 's/^\w*\ *//' | tr '\n' ' ' | grep 'eb b6 89 ec 9d 80 eb b3 84 ')" != "x" ]; then
+						distro="Red Star OS"
+						distro_codename="n/a"
+						distro_release=$(printf "${distro_release}" | grep -o '[0-9.]' | tr -d '\n')
+					fi
 					;;
 			esac
 			if [[ "${distro_detect}" =~ "RedHatEnterprise" ]]; then distro="Red Hat Enterprise Linux"; fi
+			if [[ "${distro_detect}" =~ "SUSELinuxEnterprise" ]]; then distro="SUSE Linux Enterprise"; fi
 			if [[ -n ${distro_release} && ${distro_release} != "n/a" ]]; then distro_more="$distro_release"; fi
 			if [[ -n ${distro_codename} && ${distro_codename} != "n/a" ]]; then distro_more="$distro_more $distro_codename"; fi
-			if [[ -n ${distro_more} ]]; then
-				distro_more="${distro} ${distro_more}"
-			fi
 		fi
 
 		# Existing File Check
@@ -522,21 +541,32 @@ detectdistro () {
 						distro="Cygwin"
 						fake_distro="${distro}"
 					;;
+					"Msys")
+						distro="Msys"
+						fake_distro="${distro}"
+						distro_more="${distro} $(uname -r | head -c 1)"
+					;;
 					"Haiku")
 						distro="Haiku"
-						fake_distro="${distro}"
+						distro_more="$(uname -v | tr ' ' '\n' | grep 'hrev')"
 					;;
 					"GNU/Linux")
-						if type -p crux >/dev/null 2>&1; then 
+						if type -p crux >/dev/null 2>&1; then
 							distro="CRUX"
-							distro_more="${distro} $(crux | awk '{print $3}')"
+							distro_more="$(crux | awk '{print $3}')"
 						fi
 						if type -p nixos-version >/dev/null 2>&1; then
 							distro="NixOS"
-							distro_more="NixOS $(nixos-version)"
+							distro_more="$(nixos-version)"
 						fi
 					;;
 				esac
+			fi
+			if [[ "${distro}" == "Cygwin" || "${distro}" == "Msys" ]]; then
+				# https://msdn.microsoft.com/en-us/library/ms724832%28VS.85%29.aspx
+				if [ "$(wmic os get version | grep -o '^\(6\.[23]\|10\)')" ]; then
+					fake_distro="Windows - Modern"
+				fi
 			fi
 			if [[ "${distro}" == "Unknown" ]]; then
 				if [ -f /etc/os-release ]; then
@@ -561,13 +591,23 @@ detectdistro () {
 					fi
 
 					# Hotfixes
-					[[ "${distro}" == "Void" || "${distro}" == "void" ]] && distro="Void"
+					[[ "${distro}" == "void" ]] && distro="Void"
 					[[ "${distro}" == "evolveos" ]] && distro="Evolve OS"
-					[[ "${distro}" == "antergos" || "${distro}" == "Antergos" ]] && distro="Antergos"
-					[[ "${distro}" == "logos" || "${distro}" == "Logos" ]] && distro="Logos"
-					[[ "${distro}" == "Arch" ]] && distro="Arch Linux"
-					[[ "${distro}" == "Archarm" || "${distro}" == "archarm" ]] && distro="Arch Linux"
+					[[ "${distro}" == "antergos" ]] && distro="Antergos"
+					[[ "${distro}" == "logos" ]] && distro="Logos"
+					[[ "${distro}" == "Arch" || "${distro}" == "Archarm" || "${distro}" == "archarm" ]] && distro="Arch Linux"
 					[[ "${distro}" == "elementary" ]] && distro="elementary OS"
+					[[ "${distro}" == "Fedora" && -d /etc/qubes-rpc ]] && distro="qubes" # Inner VM
+					[[ "${distro}" == "Ol" || "${distro}" == "ol" ]] && distro="Oracle Linux"
+					if [[ "${distro}" == "Oracle Linux" ]] && [ -f /etc/oracle-release ]; then
+						distro_more="$(sed 's/Oracle Linux //' /etc/oracle-release)"
+					fi
+					[[ "${distro}" == "rhel" ]] && distro="Red Hat Enterprise Linux"
+					[[ "${distro}" == "Neon" ]] && distro="KDE neon"
+					[[ "${distro}" == "SLED" || "${distro}" == "sled" || "${distro}" == "SLES" || "${distro}" == "sles" ]] && distro="SUSE Linux Enterprise"
+					if [[ "${distro}" == "SUSE Linux Enterprise" ]] && [ -f /etc/os-release ]; then
+						distro_more="$(awk -F'=' '/^VERSION_ID=/ {print $2}' /etc/os-release | tr -d '"')"
+					fi
 				fi
 			fi
 
@@ -604,16 +644,22 @@ detectdistro () {
 					elif [ -f /etc/chakra-release ]; then distro="Chakra"
 					elif [ -f /etc/crunchbang-lsb-release ]; then distro="CrunchBang"
 					elif [ -f /etc/debian_version ]; then
-						if [ -f /etc/issue ] && grep -q "gNewSense" /etc/issue ; then
-							distro="gNewSense"
-						else
-							distro="Debian"
+						if [ -f /etc/issue ]; then
+							if grep -q "gNewSense" /etc/issue ; then
+								distro="gNewSense"
+							elif grep -q "^KDE neon" /etc/issue ; then
+								distro="KDE neon"
+								distro_more="$(cut -d ' ' -f3 /etc/issue)"
+							else
+								distro="Debian"
+							fi
 						fi
 						if grep -q "Kali" /etc/debian_version ; then
 							distro="Kali Linux"
 						fi
 					elif [ -f /etc/dragora-version ]; then distro="Dragora" && distro_more="$(cut -d, -f1 /etc/dragora-version)"
 					elif [ -f /etc/evolveos-release ]; then distro="Evolve OS"
+					elif [ -f /etc/exherbo-release ]; then distro="Exherbo"
 					elif [ -f /etc/fedora-release ]; then
 						if grep -q "Korora" /etc/fedora-release; then
 							distro="Korora"
@@ -630,15 +676,57 @@ detectdistro () {
 						else
 							distro="Gentoo"
 						fi
+					elif [ -f /etc/kogaion-release ]; then distro="Kogaion"
 					elif [ -f /etc/mageia-release ]; then distro="Mageia"
-					elif [ -f /etc/mandrake-release ]; then distro="Mandrake"
-					elif [ -f /etc/mandriva-release ]; then distro="Mandriva"
+					elif [ -f /etc/mandrake-release ]; then
+						if grep -q "PCLinuxOS" /etc/mandrake-release ; then
+							distro="PCLinuxOS"
+						else
+							distro="Mandrake"
+						fi
+					elif [ -f /etc/mandriva-release ]; then
+						if grep -q "PCLinuxOS" /etc/mandriva-release ; then
+							distro="PCLinuxOS"
+						else
+							distro="Mandriva"
+						fi
 					elif [ -f /etc/NIXOS ]; then distro="NixOS"
-					elif [ -f /etc/SuSE-release ]; then distro="openSUSE"
-					elif [ -f /etc/redhat-release ] && grep -q "Red Hat" /etc/redhat-release; then distro="Red Hat Enterprise Linux"
-					elif [ -f /etc/redhat-release ] && grep -q "CentOS" /etc/redhat-release; then distro="CentOS"
+					elif [ -f /etc/oracle-release ]; then
+						distro="Oracle Linux"
+						distro_more="$(sed 's/Oracle Linux //' /etc/oracle-release)"
+					elif [ -f /etc/SuSE-release ]; then
+						distro="openSUSE"
+						if [ -f /etc/os-release ]; then
+							if [[ "$(cat /etc/os-release)" =~ "SUSE Linux Enterprise" ]]; then
+								distro="SUSE Linux Enterprise"
+								distro_codename="n/a"
+								distro_release=$(awk -F'=' '/^VERSION_ID=/ {print $2}' /etc/os-release | tr -d '"')
+							fi
+						fi
+						if [[ "${distro_codename}" == "Tumbleweed" ]]; then
+							distro_release="n/a"
+						fi
+					elif [ -f /etc/pclinuxos-release ]; then distro="PCLinuxOS"
+					elif [ -f /etc/redstar-release ]; then
+						distro="Red Star OS"
+						distro_codename="n/a"
+						distro_release=$(grep -o '[0-9.]' /etc/redstar-release | tr -d '\n')
+					elif [ -f /etc/redhat-release ]; then
+						if grep -q "CentOS" /etc/redhat-release; then
+							distro="CentOS"
+						elif grep -q "PCLinuxOS" /etc/redhat-release; then
+							distro="PCLinuxOS"
+						elif [ "x$(od -t x1 /etc/redhat-release | sed -e 's/^\w*\ *//' | tr '\n' ' ' | grep 'eb b6 89 ec 9d 80 eb b3 84 ')" != "x" ]; then
+							distro="Red Star OS"
+							distro_codename="n/a"
+							distro_release=$(grep -o '[0-9.]' /etc/redhat-release | tr -d '\n')
+						else
+							distro="Red Hat Enterprise Linux"
+						fi
 					elif [ -f /etc/slackware-version ]; then distro="Slackware"
-					elif [ -f /usr/share/doc/tc/release.txt ]; then distro="TinyCore"
+					elif [ -f /usr/share/doc/tc/release.txt ]; then
+						distro="TinyCore"
+						distro_more="$(cat /usr/share/doc/tc/release.txt)"
 					elif [ -f /etc/sabayon-edition ]; then distro="Sabayon"; fi
 				else
 					if [[ -x /usr/bin/sw_vers ]] && /usr/bin/sw_vers | grep -i "Mac OS X" >/dev/null; then
@@ -699,10 +787,21 @@ detectdistro () {
 				if [[ -f /etc/system-release ]]; then
 					if grep -q "Scientific Linux" /etc/system-release; then
 						distro="Scientific Linux"
+					elif grep -q "Oracle Linux" /etc/system-release; then
+						distro="Oracle Linux"
+					fi
+				elif [[ -f /etc/lsb-release ]]; then
+					if grep -q "CHROMEOS_RELEASE_NAME" /etc/lsb-release; then
+						distro="$(awk -F'=' '/^CHROMEOS_RELEASE_NAME=/ {print $2}' /etc/lsb-release)"
+						distro_more="$(awk -F'=' '/^CHROMEOS_RELEASE_VERSION=/ {print $2}' /etc/lsb-release)"
 					fi
 				fi
 			fi
 		fi
+	fi
+
+	if [[ -n ${distro_more} ]]; then
+		distro_more="${distro} ${distro_more}"
 	fi
 
 	if [[ "${distro}" != "Haiku" ]]; then
@@ -718,60 +817,76 @@ detectdistro () {
 	fi
 
 	case $distro in
+		alpine) distro="Alpine Linux" ;;
 		antergos) distro="Antergos" ;;
 		arch*linux*old) distro="Arch Linux - Old" ;;
 		arch|arch*linux) distro="Arch Linux" ;;
+		blag) distro="BLAG" ;;
+		bunsenlabs) distro="BunsenLabs" ;;
+		centos) distro="CentOS" ;;
+		chakra) distro="Chakra" ;;
+		chapeau) distro="Chapeau" ;;
+		chrome*|chromium*) distro="Chrome OS" ;;
+		crunchbang) distro="CrunchBang" ;;
+		crux) distro="CRUX" ;;
+		cygwin) distro="Cygwin" ;;
+		debian) distro="Debian" ;;
+		deepin) distro="Deepin" ;;
+		dragonflybsd) distro="DragonFlyBSD" ;;
 		dragora) distro="Dragora" ;;
 		elementary|'elementary os') distro="elementary OS";;
 		evolveos) distro="Evolve OS" ;;
+		exherbo|exherbo*linux) distro="Exherbo" ;;
 		fedora) distro="Fedora" ;;
-		gnewsense) distro="gNewSense" ;;
-		korora) distro="Korora" ;;
-		blag) distro="BLAG" ;;
-		chapeau) distro="Chapeau" ;;
-		crux) distro="CRUX" ;;
-		mageia) distro="Mageia" ;;
-		mandriva) distro="Mandriva" ;;
-		mandrake) distro="Mandrake" ;;
-		mint) distro="Mint" ;;
-		nix|nix*os) distro="NixOS" ;;
-		kali*linux) distro="Kali Linux" ;;
-		lmde) distro="LMDE" ;;
-		lunar|lunar*linux) distro="Lunar Linux";;
-		opensuse) distro="openSUSE" ;;
-		ubuntu) distro="Ubuntu" ;;
-		debian) distro="Debian" ;;
-		raspbian) distro="Raspbian" ;;
 		freebsd) distro="FreeBSD" ;;
 		freebsd*old) distro="FreeBSD - Old" ;;
-		logos) distro="Logos" ;;
-		openbsd) distro="OpenBSD" ;;
-		dragonflybsd) distro="DragonFlyBSD" ;;
-		netbsd) distro="NetBSD" ;;
-		red*hat*) distro="Red Hat Enterprise Linux" ;;
-		crunchbang) distro="CrunchBang" ;;
-		gentoo) distro="Gentoo" ;;
-		funtoo) distro="Funtoo" ;;
-		sabayon) distro="Sabayon" ;;
-		slackware) distro="Slackware" ;;
 		frugalware) distro="Frugalware" ;;
-		peppermint) distro="Peppermint" ;;
-		solus) distro="Solus" ;;
-		trisquel) distro="Trisquel";;
+		fuduntu) distro="Fuduntu" ;;
+		funtoo) distro="Funtoo" ;;
+		gentoo) distro="Gentoo" ;;
+		gnewsense) distro="gNewSense" ;;
+		haiku) distro="Haiku" ;;
+		kali*linux) distro="Kali Linux" ;;
+		kaos) distro="KaOS";;
+		kde*neon|neon) distro="KDE neon" ;;
+		kogaion) distro="Kogaion" ;;
+		korora) distro="Korora" ;;
+		linuxdeepin) distro="LinuxDeepin" ;;
+		lmde) distro="LMDE" ;;
+		logos) distro="Logos" ;;
+		lunar|lunar*linux) distro="Lunar Linux";;
+		mac*os*x|os*x) distro="Mac OS X" ;;
+		manjaro) distro="Manjaro" ;;
+		mageia) distro="Mageia" ;;
+		mandrake) distro="Mandrake" ;;
+		mandriva) distro="Mandriva" ;;
+		mer) distro="Mer" ;;
+		mint|linux*mint) distro="Mint" ;;
+		msys|msys2) distro="Msys" ;;
+		netbsd) distro="NetBSD" ;;
+		netrunner) distro="Netrunner" ;;
+		nix|nix*os) distro="NixOS" ;;
+		ol|oracle*linux) distro="Oracle Linux" ;;
+		openbsd) distro="OpenBSD" ;;
+		opensuse) distro="openSUSE" ;;
 		parabolagnu|parabolagnu/linux-libre|'parabola gnu/linux-libre'|parabola) distro="Parabola GNU/Linux-libre" ;;
+		pclinuxos|pclos) distro="PCLinuxOS" ;;
+		peppermint) distro="Peppermint" ;;
+		qubes) distro="Qubes OS" ;;
+		raspbian) distro="Raspbian" ;;
+		red*hat*|rhel) distro="Red Hat Enterprise Linux" ;;
+		red*star|red*star*os) distro="Red Star OS" ;;
+		sabayon) distro="Sabayon" ;;
+		sailfish|sailfish*os) distro="SailfishOS" ;;
+		slackware) distro="Slackware" ;;
+		solus) distro="Solus" ;;
+		steam|steam*os) distro="SteamOS" ;;
+		suse*linux*enterprise) distro="SUSE Linux Enterprise" ;;
+		tinycore|tinycore*linux) distro="TinyCore" ;;
+		trisquel) distro="Trisquel";;
+		ubuntu) distro="Ubuntu" ;;
 		viperr) distro="Viperr" ;;
 		void) distro="Void" ;;
-		kaos) distro="KaOS";;
-		linuxdeepin) distro="LinuxDeepin" ;;
-		deepin) distro="Deepin" ;;
-		chakra) distro="Chakra" ;;
-		centos) distro="CentOS" ;;
-		mac*os*x) distro="Mac OS X" ;;
-		fuduntu) distro="Fuduntu" ;;
-		manjaro) distro="Manjaro" ;;
-		netrunner) distro="Netrunner" ;;
-		cygwin) distro="Cygwin" ;;
-		haiku) distro="Haiku" ;;
 	esac
 	verboseOut "Finding distro...found as '${distro} ${distro_release}'"
 }
@@ -790,8 +905,11 @@ detecthost () {
 
 # Kernel Version Detection - Begin
 detectkernel () {
-	kernel=( $(uname -srm) )
-	kernel="${kernel[${#kernel[@]}-1]} ${kernel[@]:0:${#kernel[@]}-1}"
+	# compatibility for older versions of OS X:
+	kernel=$(uname -m && uname -sr)
+	kernel=${kernel//$'\n'/ }
+	#kernel=( $(uname -srm) )
+	#kernel="${kernel[${#kernel[@]}-1]} ${kernel[@]:0:${#kernel[@]}-1}"
 	verboseOut "Finding kernel version...found as '${kernel}'"
 }
 # Kernel Version Detection - End
@@ -842,22 +960,29 @@ detectuptime () {
 detectpkgs () {
 	pkgs="Unknown"
 	case "${distro}" in
-		'Arch Linux'|'Parabola GNU/Linux-libre'|'Chakra'|'Manjaro'|'Netrunner'|'Antergos'|'KaOS') pkgs=$(pacman -Qq | wc -l) ;;
+		'Alpine Linux') pkgs=$(apk info | wc -l) ;;
+		'Arch Linux'|'Parabola GNU/Linux-libre'|'Chakra'|'Manjaro'|'Antergos'|'Netrunner'|'KaOS') pkgs=$(pacman -Qq | wc -l) ;;
 		'Dragora') pkgs=$(ls -1 /var/db/pkg | wc -l) ;;
 		'Frugalware') pkgs=$(pacman-g2 -Q | wc -l) ;;
-		'Fuduntu'|'Ubuntu'|'Mint'|'Debian'|'Raspbian'|'LMDE'|'CrunchBang'|'Peppermint'|'LinuxDeepin'|'Deepin'|'Kali Linux'|'Trisquel'|'elementary OS'|'gNewSense') pkgs=$(dpkg --get-selections | grep -v deinstall$ | wc -l) ;;
+		'Fuduntu'|'Ubuntu'|'Mint'|'KDE neon'|'Debian'|'Raspbian'|'LMDE'|'CrunchBang'|'Peppermint'|'LinuxDeepin'|'Deepin'|'Kali Linux'|'Trisquel'|'elementary OS'|'gNewSense'|'BunsenLabs'|'SteamOS') pkgs=$(dpkg --get-selections | grep -v deinstall$ | wc -l) ;;
 		'Slackware') pkgs=$(ls -1 /var/log/packages | wc -l) ;;
-		'Gentoo'|'Sabayon'|'Funtoo') pkgs=$(ls -d /var/db/pkg/*/* | wc -l) ;;
+		'Gentoo'|'Sabayon'|'Funtoo'|'Chrome OS'|'Kogaion') pkgs=$(ls -d /var/db/pkg/*/* | wc -l) ;;
 		'NixOS') pkgs=$(ls -d -1 /nix/store/*/ | wc -l) ;;
-		'Fedora'|'Korora'|'BLAG'|'Chapeau'|'openSUSE'|'Red Hat Enterprise Linux'|'CentOS'|'Mandriva'|'Mandrake'|'Mageia'|'Viperr') pkgs=$(rpm -qa | wc -l) ;;
+		'Fedora'|'Korora'|'BLAG'|'Chapeau'|'openSUSE'|'SUSE Linux Enterprise'|'Red Hat Enterprise Linux'|'Oracle Linux'|'CentOS'|'Mandriva'|'Mandrake'|'Mageia'|'Mer'|'SailfishOS'|'PCLinuxOS'|'Viperr'|'Qubes OS'|'Red Star OS') pkgs=$(rpm -qa | wc -l) ;;
 		'Void') pkgs=$(xbps-query -l | wc -l) ;;
 		'Evolve OS'|'Solus') pkgs=$(pisi list-installed | wc -l) ;;
 		'CRUX') pkgs=$(pkginfo -i | wc -l) ;;
 		'Lunar Linux') pkgs=$(lvu installed | wc -l) ;;
+		'TinyCore') pkgs=$(tce-status -i | wc -l) ;;
+		'Exherbo')
+			xpkgs=$(ls -d -1 /var/db/paludis/repositories/cross-installed/*/data/* | wc -l)
+			pkgs=$(ls -d -1 /var/db/paludis/repositories/installed/data/* | wc -l)
+			pkgs=$((${pkgs} + ${xpkgs}))
+		;;
 		'Mac OS X')
-			if [ -d "/usr/local/bin" ]; then 
+			if [ -d "/usr/local/bin" ]; then
 				loc_pkgs=$(ls -l /usr/local/bin/ | grep -v "\(../Cellar/\|brew\)" | wc -l)
-				pkgs=$((${loc_pkgs} -1)); 
+				pkgs=$((${loc_pkgs} -1));
 			fi
 
 			if type -p port >/dev/null 2>&1; then
@@ -869,17 +994,20 @@ detectpkgs () {
 				brew_pkgs=$(brew list -1 2>/dev/null | wc -l)
 				pkgs=$((${pkgs} + ${brew_pkgs}))
 			fi
-		;;
-		'OpenBSD') 
-			pkgs=$(pkg_info | wc -l | awk '{sub(" ", "");print $1}')
-			if type -p portmaster >/dev/null 2>&1; then
-				ports=$(portmaster -l | grep -Eo '[0-9]+ total installed' | sed 's/ total installed//')
-				pkgs=$((${pkgs} + ${ports}))
+			if type -p pkgin >/dev/null 2>&1; then
+				pkgsrc_pkgs=$(pkgin list 2>/dev/null | wc -l)
+				pkgs=$((${pkgs} + ${pkgsrc_pkgs}))
 			fi
 		;;
+		'OpenBSD')
+			pkgs=$(pkg_info | wc -l | awk '{sub(" ", "");print $1}')
+		;;
 		'FreeBSD')
-			pkgs=$(if TMPDIR=/dev/null ASSUME_ALWAYS_YES=1 PACKAGESITE=file:///nonexistent pkg info pkg >/dev/null 2>&1; then 
+			pkgs=$(if TMPDIR=/dev/null ASSUME_ALWAYS_YES=1 PACKAGESITE=file:///nonexistent pkg info pkg >/dev/null 2>&1; then
 				pkg info | wc -l | awk '{print $1}'; else pkg_info | wc -l | awk '{sub(" ", "");print $1}'; fi)
+		;;
+		'NetBSD')
+			pkgs=$(pkg_info | wc -l | tr -d ' ')
 		;;
 		'Cygwin')
 			cygfix=2
@@ -887,6 +1015,22 @@ detectpkgs () {
 			if [ -d "/cygdrive/c/ProgramData/chocolatey/lib" ]; then
 				chocopkgs=$(( $(ls -1 /cygdrive/c/ProgramData/chocolatey/lib | wc -l) ))
 				pkgs=$((${pkgs} + ${chocopkgs}))
+			fi
+		;;
+		'Msys')
+			pkgs=$(pacman -Qq | wc -l)
+			if [ -d "/c/ProgramData/chocolatey/lib" ]; then
+				chocopkgs=$(( $(ls -1 /c/ProgramData/chocolatey/lib | wc -l) ))
+				pkgs=$((${pkgs} + ${chocopkgs}))
+			fi
+		;;
+		'Haiku')
+			haikualpharelease="no"
+			if [ -d /boot/system/package-links ]; then
+				pkgs=$(ls /boot/system/package-links | wc -l)
+			elif type -p installoptionalpackage >/dev/null 2>&1; then
+				haikualpharelease="yes"
+				pkgs=$(installoptionalpackage -l | sed -n '3p' | wc -w)
 			fi
 		;;
 	esac
@@ -913,31 +1057,33 @@ detectcpu () {
 		REGEXP="-E"
 	elif [ "$OSTYPE" == "gnu" ]; then
 		# no /proc/cpuinfo on GNU/Hurd
-		if [ "$(uname -m | grep 'i*86')" ]; then
+		if [ "$(uname -m | grep 'i.86')" ]; then
 			cpu="Unknown x86"
 		else
 			cpu="Unknown"
 		fi
-	elif [[ "$distro" == "FreeBSD" || "$distro" == "DragonflyBSD" ]]; then
+	elif [ "$distro" == "FreeBSD" ]; then
+		cpu=$(dmesg | grep 'CPU:' | head -n 1 | sed -r 's/CPU: //' | sed -e 's/([^()]*)//g')
+	elif [ "$distro" == "DragonflyBSD" ]; then
 		cpu=$(sysctl -n hw.model)
 	elif [ "$distro" == "OpenBSD" ]; then
 		cpu=$(sysctl -n hw.model | sed 's/@.*//')
 	elif [ "$distro" == "Haiku" ]; then
-		cpu=$(sysinfo -cpu | grep 'CPU #0' | cut -d'"' -f2 | sed 's/(tm)//; s/Processor//;')
+		cpu=$(sysinfo -cpu | grep 'CPU #0' | cut -d'"' -f2 | awk 'BEGIN{FS=" @"; OFS="\n"} { print $1; exit }')
 		cpu_mhz=$(sysinfo -cpu | grep 'running at' | awk 'BEGIN{FS="running at "} { print $2; exit }' | cut -d'M' -f1)
 		if [ $(echo $cpu_mhz) -gt 999 ];then
 			cpu_ghz=$(awk '{print $1/1000}' <<< "${cpu_mhz}")
-			cpu="$cpu @ ${cpu_ghz}GHz"
+			cpufreq="${cpu_ghz}GHz"
 		else
-			cpu="$cpu @ ${cpu_mhz}MHz"
+			cpufreq="${cpu_mhz}MHz"
 		fi
 	else
-		cpu=$(awk 'BEGIN{FS=":"} /model name/ { print $2; exit }' /proc/cpuinfo | sed 's/ @/\n/' | head -1)
-		cpun=$(grep "physical id" /proc/cpuinfo | sort | uniq | wc -l)
+		cpu=$(awk 'BEGIN{FS=":"} /model name/ { print $2; exit }' /proc/cpuinfo | awk 'BEGIN{FS=" @"; OFS="\n"} { print $1; exit }')
+		cpun=$(grep -c '^processor' /proc/cpuinfo)
 		if [ -z "$cpu" ]; then
 			cpu=$(awk 'BEGIN{FS=":"} /Hardware/ { print $2; exit }' /proc/cpuinfo)
 		fi
-		if [ -z "$cpu" ]; then 
+		if [ -z "$cpu" ]; then
 			cpu=$(awk 'BEGIN{FS=":"} /^cpu/ { gsub(/  +/," ",$2); print $2; exit}' /proc/cpuinfo | sed 's/, altivec supported//;s/^ //')
 			if [[ $cpu =~ ^(PPC)*9.+ ]]; then
 				model="IBM PowerPC G5 "
@@ -963,17 +1109,23 @@ detectcpu () {
 		if [ -n "$cpu_mhz" ];then
 			if [ $(echo $cpu_mhz | cut -d. -f1) -gt 999 ];then
 				cpu_ghz=$(awk '{print $1/1000}' <<< "${cpu_mhz}")
-				cpu="$cpu @ ${cpu_ghz}GHz"
+				cpufreq="${cpu_ghz}GHz"
 			else
-				cpu="$cpu @ ${cpu_mhz}MHz"
+				cpufreq="${cpu_mhz}MHz"
 			fi
 		fi
 	fi
-        if [[ "${cpun}" -gt "1" ]]; then
-               	cpu=$(sed $REGEXP 's/\([tT][mM]\)|\([Rr]\)|[pP]rocessor//g' <<< "${cpun}x ${cpu}" | xargs)
-        else
-               	cpu=$(sed $REGEXP 's/\([tT][mM]\)|\([Rr]\)|[pP]rocessor//g' <<< "${cpu}" | xargs)
-        fi
+	if [[ "${cpun}" -gt "1" ]]; then
+		cpun="${cpun}x "
+	else
+		cpun=""
+	fi
+	if [ -z "$cpufreq" ]; then
+		cpu="${cpun}${cpu}"
+	else
+		cpu="$cpu @ ${cpun}${cpufreq}"
+	fi
+	cpu=$(sed $REGEXP 's/\([tT][mM]\)|\([Rr]\)|[pP]rocessor//g' <<< "${cpu}" | xargs)
 	verboseOut "Finding current CPU...found as '$cpu'"
 }
 # CPU Detection - End
@@ -982,12 +1134,25 @@ detectcpu () {
 # GPU Detection - Begin (EXPERIMENTAL!)
 detectgpu () {
 	if [[ "${distro}" == "FreeBSD" ]]; then
-		gpu_info=$(pciconf -lv 2> /dev/null | grep -B 4 VGA)
-		gpu_info=$(grep -E 'device.*=.*' <<< "${gpu_info}")
-		gpu="${gpu_info##*device*= }"
-		gpu="${gpu//\'}"
-		# gpu=$(sed 's/.*device.*= //' <<< "${gpu_info}" | sed "s/'//g")
-	elif [[ "$distro" != "Mac OS X" ]]; then
+		nvisettexist=$(which nvidia-settings)
+		if [ -x "$nvisettexist" ]; then
+			gpu="$(nvidia-settings -t -q gpus | grep \( | sed 's/.*(\(.*\))/\1/')"
+		else
+			gpu_info=$(pciconf -lv 2> /dev/null | grep -B 4 VGA)
+			gpu_info=$(grep -E 'device.*=.*' <<< "${gpu_info}")
+			gpu="${gpu_info##*device*= }"
+			gpu="${gpu//\'}"
+			# gpu=$(sed 's/.*device.*= //' <<< "${gpu_info}" | sed "s/'//g")
+		fi
+	elif [[ "${distro}" == "OpenBSD" ]]; then
+		gpu=$(glxinfo | grep 'OpenGL renderer string' | sed 's/OpenGL renderer string: //')
+	elif [[ "${distro}" == "Mac OS X" ]]; then
+		gpu=$(system_profiler SPDisplaysDataType | awk -F': ' '/^\ *Chipset Model:/ {print $2}' | awk '{ printf "%s / ", $0 }' | sed -e 's/\/ $//g')
+	elif [[ "${distro}" == "Cygwin" || "${distro}" == "Msys" ]]; then
+		gpu=$(wmic path Win32_VideoController get caption | sed -n '2p')
+	elif [[ "${distro}" == "Haiku" ]]; then
+		gpu="$(listdev | grep -A2 -e 'device Display controller' | tail -n1 | sed 's/  device ....: //')"
+	else
 		if [[ -n "$(PATH="/opt/bin:$PATH" type -p nvidia-smi)" ]]; then
 			gpu=$($(PATH="/opt/bin:$PATH" type -p nvidia-smi | cut -f1) -q | awk -F':' '/Product Name/ {gsub(/: /,":"); print $2}' | sed ':a;N;$!ba;s/\n/, /g')
 		elif [[ -n "$(PATH="/usr/sbin:$PATH" type -p glxinfo)" && -z "${gpu}" ]]; then
@@ -999,11 +1164,6 @@ detectgpu () {
 			gpu_info=$($(PATH="/usr/bin:$PATH" type -p lspci | cut -f1) 2> /dev/null | grep VGA)
 			gpu=$(grep -oE '\[.*\]' <<< "${gpu_info}" | sed 's/\[//;s/\]//' | sed -n '1h;2,$H;${g;s/\n/, /g;p}')
 		fi
-	elif [[ "${distro}" == "Mac OS X" ]]; then
-		gpu=$(system_profiler SPDisplaysDataType | awk -F': ' '/^\ *Chipset Model:/ {print $2}' | awk '{ printf "%s / ", $0 }' | sed -e 's/\/ $//g')
-	elif [[ "${distro}" == "Cygwin" ]]; then
-		gpu=$(wmic path Win32_VideoController get caption)
-		gpu=$(tail -1 <<< ${gpu})
 	fi
 
 	if [ -n "$gpu" ];then
@@ -1038,7 +1198,7 @@ detectdisk () {
 		elif [[ "${distro}" == "Mac OS X" ]]; then
 			totaldisk=$(df -H / 2>/dev/null | tail -1)
 		else
-			totaldisk=$(df -h --total 2>/dev/null | tail -1)
+			totaldisk=$(df -h -x aufs -x tmpfs --total 2>/dev/null | tail -1)
 		fi
 		disktotal=$(awk '{print $2}' <<< "${totaldisk}")
 		diskused=$(awk '{print $3}' <<< "${totaldisk}")
@@ -1047,7 +1207,7 @@ detectdisk () {
 		diskusage_verbose=$(sed 's/%/%%/' <<< $diskusage)
 	fi
 	verboseOut "Finding current disk usage...found as '$diskusage_verbose'"
-}	
+}
 # Disk Usage Detection - End
 
 
@@ -1061,8 +1221,11 @@ detectmem () {
 		wiredmem=$(vm_stat | grep wired | awk '{ print $4 }' | sed 's/\.//')
 		activemem=$(vm_stat | grep ' active' | awk '{ print $3 }' | sed 's/\.//')
 		compressedmem=$(vm_stat | grep occupied | awk '{ print $5 }' | sed 's/\.//')
-		usedmem=$(((${wiredmem} + ${activemem} + ${compressedmem}) * 4 / $human))		 		
-	elif [ "$distro" == "Cygwin" ]; then
+		if [[ ! -z "$compressedmem | tr -d" ]]; then
+			compressedmem=0
+		fi
+		usedmem=$(((${wiredmem} + ${activemem} + ${compressedmem}) * 4 / $human))
+	elif [[ "${distro}" == "Cygwin" || "${distro}" == "Msys" ]]; then
 		total_mem=$(awk '/MemTotal/ { print $2 }' /proc/meminfo)
 		totalmem=$((${total_mem}/$human))
 		free_mem=$(awk '/MemFree/ { print $2 }' /proc/meminfo)
@@ -1090,8 +1253,8 @@ detectmem () {
 		used_mem=$(($round_mem - $avail_mem))
 		usedmem=$(($used_mem / ($human * $human) ))
 	elif [ "$distro" == "OpenBSD" ]; then
-		totalmem=$(dmesg | grep 'real mem' | cut -d' ' -f5 | tr -d '()MB')
-		usedmem=$(top -1 1 | awk '/Real:/ {print $3}' | sed 's/M.*//')
+		totalmem=$(($(sysctl -n hw.physmem) / $human / $human))
+		usedmem=$(($(vmstat | sed -n 3p | cut -d' ' -f5) / $human))
 	elif [ "$distro" == "NetBSD" ]; then
 		phys_mem=$(awk '/MemTotal/ { print $2 }' /proc/meminfo)
 		totalmem=$((${phys_mem} / $human))
@@ -1168,13 +1331,19 @@ detectshell_ver () {
 }
 detectshell () {
 	if [[ ! "${shell_type}" ]]; then
-		if [[ "${distro}" == "Cygwin" || "${distro}" == "Haiku" || "${OSTYPE}" == "gnu" ]]; then
+		if [[ "${distro}" == "Cygwin" || "${distro}" == "Msys" || "${distro}" == "Haiku" || "${distro}" == "Alpine Linux" || "${OSTYPE}" == "gnu" ]]; then
 			shell_type=$(echo "$SHELL" | awk -F'/' '{print $NF}')
+		elif [[ "${distro}" == "TinyCore" ]]; then
+			if [[ "$(readlink "$SHELL")" == "busybox" ]]; then
+				shell_type="BusyBox"
+			else
+				shell_type=$(echo "$SHELL" | awk -F'/' '{print $NF}')
+			fi
 		else
 			if [[ "${OSTYPE}" == "linux-gnu" || "${OSTYPE}" == "linux" ]]; then
 				shell_type=$(ps -p $PPID -o cmd --no-heading)
-			elif [[ "${distro}" == "Mac OS X" || "${distro}" == "FreeBSD" || "${distro}" == "OpenBSD" ]]; then
-				shell_type=$(ps -p $PPID -o args | tail -1)
+			elif [[ "${distro}" == "Mac OS X" || "${distro}" == "FreeBSD" || "${distro}" == "OpenBSD" || "${distro}" == "NetBSD" ]]; then
+				shell_type=$(ps -p $PPID -o command | tail -1)
 			else
 				shell_type=$(ps -p $(ps -p $PPID | awk '$1 !~ /PID/ {print $1}') | awk 'FNR>1 {print $1}')
 			fi
@@ -1186,6 +1355,9 @@ detectshell () {
 	case $shell_type in
 		bash)
 			shell_version_data=$( detectshell_ver "$shell_type" "^GNU.bash,.version" "4" )
+			;;
+		BusyBox)
+			shell_version_data=$( busybox | head -n1 | cut -d ' ' -f2 )
 			;;
 		csh)
 			shell_version_data=$( detectshell_ver "$shell_type" "$shell_type" "3" )
@@ -1216,7 +1388,7 @@ detectshell () {
 
 # Resolution Detection - Begin
 detectres () {
-	if [[ ${distro} != "Mac OS X" && ${distro} != "Cygwin" ]]; then
+	if [[ ${distro} != "Mac OS X" && ${distro} != "Cygwin" && "${distro}" != "Msys" && ${distro} != "Haiku" ]]; then
 		if [[ -n ${DISPLAY} ]]; then
 			if type -p xdpyinfo >/dev/null 2>&1; then
 				if [[ "$distro" =~ "BSD" ]]; then
@@ -1231,18 +1403,12 @@ detectres () {
 		if [[ "$(echo $xResolution | wc -l)" -ge 1 ]]; then
 			xResolution=$(echo $xResolution | tr "\\n" "," | sed 's/\(.*\),/\1/')
 		fi
-	elif [[ "${distro}" == "Cygwin" ]]; then
-		width=($(wmic desktopmonitor get screenwidth | grep -vE '[a-z]+' | tr '\r\n' ' '))
-		height=($(wmic desktopmonitor get screenheight | grep -vE '[a-z]+' | tr '\r\n' ' '))
-
-		xResolution=""
-		len=${#width[@]}
-		
-		delim=" "
-		for ((i=0;i<len;i++)); do
-			xResolution="${xResolution}${delim}${width[i]}x${height[i]}"
-		done
-		xResolution=$(echo $xResolution | sed "s/^$delim//")
+	elif [[ "${distro}" == "Cygwin" || "${distro}" == "Msys" ]]; then
+		xResolution=$(wmic path Win32_VideoController get CurrentHorizontalResolution,CurrentVerticalResolution | awk 'NR==2 {print $1"x"$2}')
+	elif [[ "${distro}" == "Haiku" ]]; then
+		width=$(screenmode | cut -d ' ' -f2)
+		height=$(screenmode | cut -d ' ' -f3 | tr -d ',')
+		xResolution="$(echo ${width}x${height})"
 	else
 		xResolution="No X Server"
 	fi
@@ -1254,7 +1420,7 @@ detectres () {
 # DE Detection - Begin
 detectde () {
 	DE="Not Present"
-	if [[ ${distro} != "Mac OS X" && ${distro} != "Cygwin" ]]; then
+	if [[ ${distro} != "Mac OS X" && ${distro} != "Cygwin" && "${distro}" != "Msys" ]]; then
 		if [[ -n ${DISPLAY} ]]; then
 			if type -p xprop >/dev/null 2>&1;then
 				xprop_root="$(xprop -root 2>/dev/null)"
@@ -1273,12 +1439,12 @@ detectde () {
 							de = "KDE"$NF
 							exit
 						}
-						else if ($1 ~ /^_MARCO/) {
-							de = "MATE"
-							exit
-						}
 						else if ($1 ~ /^_MUFFIN/) {
 							de = "Cinnamon"
+							exit
+						}
+						else if ($1 ~ /^TDE_FULL_SESSION/) {
+							de = "Trinity"
 							exit
 						}
 						else if ($0 ~ /"xfce4"/) {
@@ -1309,7 +1475,7 @@ detectde () {
 						KDE)
 							DE=KDE;
 							;;
-						LUMINA)
+						LUMINA|Lumina)
 							DE=Lumina;
 							;;
 						LXDE)
@@ -1327,14 +1493,18 @@ detectde () {
 						Unity)
 							DE=Unity
 							;;
+						LXQt)
+							DE=LXQt
+							;;
 					esac
 				fi
 
-				if [ x"$DE" = x"" ]; then
+				if [ -n "$DE" ]; then
 					# classic fallbacks
-					if [ x"$KDE_FULL_SESSION" != x"" ]; then DE=KDE;
-					elif [ x"$GNOME_DESKTOP_SESSION_ID" != x"" ]; then DE=Gnome;
-					elif [ x"$MATE_DESKTOP_SESSION_ID" != x"" ]; then DE=MATE;
+					if [ -n "$KDE_FULL_SESSION" ]; then DE=KDE;
+					elif [ -n "$TDE_FULL_SESSION" ]; then DE=Trinity;
+					elif [ -n "$GNOME_DESKTOP_SESSION_ID" ]; then DE=Gnome;
+					elif [ -n "$MATE_DESKTOP_SESSION_ID" ]; then DE=MATE;
 					elif `dbus-send --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.GetNameOwner string:org.gnome.SessionManager > /dev/null 2>&1` ; then DE=Gnome;
 					elif xprop -root _DT_SAVE_MODE 2> /dev/null | grep ' = \"xfce4\"$' >/dev/null 2>&1; then DE=XFCE;
 					elif xprop -root 2> /dev/null | grep -i '^xfce_desktop_window' >/dev/null 2>&1; then DE=XFCE
@@ -1342,13 +1512,22 @@ detectde () {
 					fi
 				fi
 
-				if [ x"$DE" = x"" ]; then
+				case "$DESKTOP_SESSION" in
+					gnome|gnome-fallback|gnome-fallback-compiz )
+						DE=Gnome
+						;;
+					deepin)
+						DE=Deepin
+						;;
+				esac
+
+				if [ -n "$DE" ]; then
 					# fallback to checking $DESKTOP_SESSION
 					case "$DESKTOP_SESSION" in
 						gnome)
 							DE=Gnome;
 							;;
-						LUMINA)
+						LUMINA|Lumina)
 							DE=Lumina;
 							;;
 						LXDE|Lubuntu)
@@ -1366,10 +1545,13 @@ detectde () {
 						Cinnamon)
 							DE=Cinnamon
 							;;
+						trinity)
+							DE=Trinity
+							;;
 					esac
 				fi
 
-				if [ x"$GDMSESSION" = x"" ]; then
+				if [ -n "$DE" ]; then
 					# fallback to checking $GDMSESSION
 					case "$GDMSESSION" in
 						Lumina*|LUMINA*|lumina*)
@@ -1400,16 +1582,13 @@ detectde () {
 						elif [[ ${KDE_SESSION_VERSION} == '4' ]]; then
 							DE="KDE4"
 						fi
-					elif [[ -n ${KDE_FULL_SESSION} ]]; then
-						if [[ ${KDE_FULL_SESSION} == 'true' ]]; then
-							DE="KDE"
-							DEver_data=$( kded --version 2>/dev/null )
-							DEver=$( grep -si '^KDE:' <<< "$DEver_data" | awk '{print $2}' )
-						fi
+					elif [[ "x${KDE_FULL_SESSION}" == "xtrue" ]]; then
+						DE="KDE"
+						DEver_data=$(kded --version 2>/dev/null)
+						DEver=$(grep -si '^KDE:' <<< "$DEver_data" | awk '{print $2}')
 					fi
 				fi
 			fi
-
 
 			if [[ ${DE} != "Not Present" ]]; then
 				if [[ ${DE} == "Cinnamon" ]]; then
@@ -1428,12 +1607,21 @@ detectde () {
 				elif [[ ${DE} == "KDE4" || ${DE} == "KDE5" ]]; then
 					if type -p kded${DE#KDE} >/dev/null 2>&1; then
 						DEver=$(kded${DE#KDE} --version)
-						for l in $(echo "${DEver// /_}"); do
-							if [[ ${l//:*} == "KDE_Development_Platform" ]]; then
-								DEver=${l//*:_}
-								DE="KDE ${DEver//_*}"
-							fi;
-						done
+						if [[ $(( $(echo "$DEver" | wc -w) )) -eq 2 ]] && [[ "$(echo "$DEver" | cut -d ' ' -f1)" == "kded${DE#KDE}" ]]; then
+							DEver=$(echo "$DEver" | cut -d ' ' -f2)
+							DE="KDE ${DEver}"
+						else
+							for l in $(echo "${DEver// /_}"); do
+								if [[ ${l//:*} == "KDE_Development_Platform" ]]; then
+									DEver=${l//*:_}
+									DE="KDE ${DEver//_*}"
+								fi
+							done
+						fi
+						if pgrep plasmashell >/dev/null 2>&1; then
+							DEver=$(plasmashell --version | cut -d ' ' -f2)
+							DE="$DE / Plasma $DEver"
+						fi
 					fi
 				elif [[ ${DE} == "Lumina" ]]; then
 					if type -p Lumina-DE.real >/dev/null 2>&1; then
@@ -1441,7 +1629,7 @@ detectde () {
 					elif type -p Lumina-DE >/dev/null 2>&1; then
 						lumina="$(type -p Lumina-DE)"
 					fi
-					if [[ x"$lumina" != x ]]; then
+					if [ -n "$lumina" ]; then
 						if grep -e '--version' "$lumina" >/dev/null; then
 							DEver=$("$lumina" --version 2>&1 | tr -d \")
 							DE="${DE} ${DEver}"
@@ -1457,6 +1645,16 @@ detectde () {
 						DEver=$(unity --version)
 						DE="${DE} ${DEver//* }"
 					fi
+				elif [[ ${DE} == "Deepin" ]]; then
+					if [[ -f /etc/deepin-version ]]; then
+						DEver="$(awk -F '=' '/Version/ {print $2}' /etc/deepin-version)"
+						DE="${DE} ${DEver//* }"
+					fi
+				elif [[ ${DE} == "Trinity" ]]; then
+					if type -p tde-config >/dev/null 2>&1; then
+						DEver="$(tde-config --version | awk -F ' ' '/TDE:/ {print $2}')"
+						DE="${DE} ${DEver//* }"
+					fi
 				fi
 			fi
 
@@ -1467,6 +1665,8 @@ detectde () {
 						DEver=$(lxpanel -v)
 						DE="${DE} $DEver"
 					fi
+				elif pgrep -U ${UID} lxqt-session >/dev/null 2>&1; then
+					DE="LXQt"
 				elif pgrep -U ${UID} razor-session >/dev/null 2>&1; then
 					DE="RazorQt"
 				elif pgrep -U ${UID} dtsession >/dev/null 2>&1; then
@@ -1478,11 +1678,13 @@ detectde () {
 		if ps -U ${USER} | grep [F]inder >/dev/null 2>&1; then
 			DE="Aqua"
 		fi
-	elif [[ "${distro}" == "Cygwin" ]]; then
-		winver=`wmic os get version | grep -o '^[0-9]'`
-		if [ "$winver" == "7" ]; then DE='Aero'
-		elif [ "$winver" == "6" ]; then DE='Aero'
-		else DE='Luna'; fi
+	elif [[ "${distro}" == "Cygwin" || "${distro}" == "Msys" ]]; then
+		# https://msdn.microsoft.com/en-us/library/ms724832%28VS.85%29.aspx
+		if [ "$(wmic os get version | grep -o '^\(6\|10\)')" ]; then
+			DE='Aero'
+		else
+			DE='Luna'
+		fi
 	fi
 	verboseOut "Finding desktop environment...found as '$DE'"
 }
@@ -1492,7 +1694,7 @@ detectde () {
 # WM Detection - Begin
 detectwm () {
 	WM="Not Found"
-	if [[ ${distro} != "Mac OS X" && ${distro} != "Cygwin" ]]; then
+	if [[ ${distro} != "Mac OS X" && ${distro} != "Cygwin" && "${distro}" != "Msys" ]]; then
 		if [[ -n ${DISPLAY} ]]; then
 			for each in "${wmnames[@]}"; do
 				PID="$(pgrep -U ${UID} "^$each$")"
@@ -1502,20 +1704,25 @@ detectwm () {
 						'9wm') WM="9wm";;
 						'awesome') WM="Awesome";;
 						'beryl') WM="Beryl";;
-						'bspwm') WM="bspwm";;
 						'blackbox') WM="BlackBox";;
+						'bspwm') WM="bspwm";;
 						'budgie-wm') WM="BudgieWM";;
+						'chromeos-wm') WM="chromeos-wm";;
 						'cinnamon') WM="Muffin";;
 						'compiz') WM="Compiz";;
+						'deepin-wm') WM="deepin-wm";;
 						'dminiwm') WM="dminiwm";;
-						'dwm') WM="dwm";;
 						'dtwm') WM="dtwm";;
+						'dwm') WM="dwm";;
 						'e16') WM="E16";;
 						'emerald') WM="Emerald";;
 						'enlightenment') WM="E17";;
 						'fluxbox') WM="FluxBox";;
+						'flwm'|'flwm_topside') WM="FLWM";;
 						'fvwm') WM="FVWM";;
 						'herbstluftwm') WM="herbstluftwm";;
+						'howm') WM="howm";;
+						'i3') WM="i3";;
 						'icewm') WM="IceWM";;
 						'kwin') WM="KWin";;
 						'metacity') WM="Metacity";;
@@ -1530,12 +1737,13 @@ detectwm () {
 						'spectrwm') WM="SpectrWM";;
 						'stumpwm') WM="StumpWM";;
 						'subtle') WM="subtle";;
+						'sway') WM="sway";;
 						'swm') WM="swm";;
+						'twin') WM="TWin";;
 						'wmaker') WM="WindowMaker";;
 						'wmfs') WM="WMFS";;
 						'wmii') WM="wmii";;
 						'xfwm4') WM="Xfwm4";;
-						'i3') WM="i3";;
 						'xmonad.*') WM="XMonad";;
 					esac
 				fi
@@ -1573,13 +1781,16 @@ detectwm () {
 					WM="$(tr '[:upper:]' '[:lower:]' <<< ${WM})"
 				fi
 				case ${WM} in
+					*'gala'*) WM="Gala";;
 					'2bwm') WM="2bwm";;
 					'awesome') WM="Awesome";;
 					'beryl') WM="Beryl";;
 					'blackbox') WM="BlackBox";;
 					'budgiewm') WM="BudgieWM";;
+					'chromeos-wm') WM="chromeos-wm";;
 					'cinnamon') WM="Cinnamon";;
 					'compiz') WM="Compiz";;
+					'deepin-wm') WM="Deepin WM";;
 					'dminiwm') WM="dminiwm";;
 					'dwm') WM="dwm";;
 					'e16') WM="E16";;
@@ -1587,17 +1798,19 @@ detectwm () {
 					'emerald') WM="Emerald";;
 					'enlightenment') WM="E17";;
 					'fluxbox') WM="FluxBox";;
+					'flwm'|'flwm_topside') WM="FLWM";;
 					'fvwm') WM="FVWM";;
+					'gnome shell'*) WM="Mutter";;
 					'herbstluftwm') WM="herbstluftwm";;
+					'howm') WM="howm";;
+					'i3') WM="i3";;
 					'icewm') WM="IceWM";;
 					'kwin') WM="KWin";;
 					'metacity') WM="Metacity";;
 					'monsterwm') WM="monsterwm";;
-					'musca') WM="Musca";;
-					*'gala'*) WM="Gala";;
-					'mutter'*) WM="Mutter";;
-					'gnome shell'*) WM="Mutter";;
 					'muffin') WM="Muffin";;
+					'musca') WM="Musca";;
+					'mutter'*) WM="Mutter";;
 					'notion') WM="Notion";;
 					'openbox') WM="OpenBox";;
 					'pekwm') WM="PekWM";;
@@ -1607,13 +1820,14 @@ detectwm () {
 					'spectrwm') WM="SpectrWM";;
 					'stumpwm') WM="StumpWM";;
 					'subtle') WM="subtle";;
+					'sway') WM="sway";;
 					'swm') WM="swm";;
+					'twin') WM="TWin";;
 					'wmaker') WM="WindowMaker";;
 					'wmfs') WM="WMFS";;
 					'wmii') WM="wmii";;
 					'xfwm4') WM="Xfwm4";;
 					'xmonad') WM="XMonad";;
-					'i3') WM="i3";;
 				esac
 			fi
 		fi
@@ -1621,7 +1835,7 @@ detectwm () {
 		if ps -U ${USER} | grep Finder >/dev/null 2>&1; then
 			WM="Quartz Compositor"
 		fi
-	elif [[ "${distro}" == "Cygwin" ]]; then
+	elif [[ "${distro}" == "Cygwin" || "${distro}" == "Msys" ]]; then
 		bugn=$(tasklist | grep -o 'bugn' | tr -d '\r \n')
 		wind=$(tasklist | grep -o 'Windawesome' | tr -d '\r \n')
 		if [ "$bugn" = "bugn" ]; then WM="bug.n"
@@ -1662,10 +1876,16 @@ detectwmtheme () {
 				Win_theme=$(gconftool-2 -g /apps/metacity/general/theme)
 			fi
 		;;
+		'Deepin WM')
+			if type -p gsettings >/dev/null 2>&1; then
+				Win_theme="$(gsettings get com.deepin.wrap.gnome.desktop.wm.preferences theme)"
+				Win_theme=${Win_theme//"'"}
+			fi
+		;;
 		'dminiwm') Win_theme="Not Applicable";;
 		'dwm') Win_theme="Not Applicable";;
 		'E16') Win_theme="$(awk -F"= " '/theme.name/ {print $2}' $HOME/.e16/e_config--0.0.cfg)";;
-		'E17'|'Enlightenment') 
+		'E17'|'Enlightenment')
 			if [ "$(which eet 2>/dev/null)" ]; then
 				econfig="$(eet -d $HOME/.e/e/config/standard/e.cfg config | awk '/value \"file\" string.*.edj/{ print $4 }')"
 				econfigend="${econfig##*/}"
@@ -1680,6 +1900,7 @@ detectwmtheme () {
 		'Finder') Win_theme="Not Applicable";;
 		'FluxBox'|'Fluxbox') if [ -f $HOME/.fluxbox/init ]; then Win_theme="$(awk -F"/" '/styleFile/ {print $NF}' $HOME/.fluxbox/init)"; fi;;
 		'FVWM') Win_theme="Not Applicable";;
+		'howm') Win_theme="Not Applicable";;
 		'i3') Win_theme="Not Applicable";;
 		'IceWM') if [ -f $HOME/.icewm/theme ]; then Win_theme="$(awk -F"[\",/]" '!/#/ {print $2}' $HOME/.icewm/theme)"; fi;;
 		'KWin'*)
@@ -1694,25 +1915,29 @@ detectwmtheme () {
 			fi
 
 			if [[ -n $KDE_CONFIG_DIR ]]; then
+				Win_theme="Not Applicable"
 				KDE_CONFIG_DIR=${KDE_CONFIG_DIR%/}
 				if [[ -f $KDE_CONFIG_DIR/share/config/kwinrc ]]; then
-					Win_theme=$(awk '/PluginLib=kwin3_/{gsub(/PluginLib=kwin3_/,"",$0); print $0; exit}' $KDE_CONFIG_DIR/share/config/kwinrc)
+					Win_theme="$(awk '/PluginLib=kwin3_/{gsub(/PluginLib=kwin3_/,"",$0); print $0; exit}' $KDE_CONFIG_DIR/share/config/kwinrc)"
+					if [[ -z "$Win_theme" ]]; then Win_theme="Not Applicable"; fi
 				fi
-				if [[ -z $Win_theme ]]; then
+				if [[ "$Win_theme" == "Not Applicable" ]]; then
 					if [[ -f $KDE_CONFIG_DIR/share/config/kdebugrc ]]; then
-						Win_theme=$(awk '/(decoration)/ {gsub(/\[/,"",$1); print $1; exit}' $KDE_CONFIG_DIR/share/config/kdebugrc)
-						if [[ -z $Win_theme ]]; then
-							Win_theme="Not Applicable"
-						fi
-					else
-						Win_theme="Not Applicable"
+						Win_theme="$(awk '/(decoration)/ {gsub(/\[/,"",$1); print $1; exit}' $KDE_CONFIG_DIR/share/config/kdebugrc)"
+						if [[ -z "$Win_theme" ]]; then Win_theme="Not Applicable"; fi
+					fi
+				fi
+				if [[ "$Win_theme" == "Not Applicable" ]]; then
+					if [[ -f $KDE_CONFIG_DIR/share/config/kdeglobals ]]; then
+						Win_theme="$(awk '/\[General\]/ {flag=1;next} /^$/{flag=0} flag {print}' $KDE_CONFIG_DIR/share/config/kdeglobals | grep -oP 'Name=\K.*')"
+						if [[ -z "$Win_theme" ]]; then Win_theme="Not Applicable"; fi
 					fi
 				fi
 
-				if [[ $Win_theme != 'Not Applicable' ]]; then
+				if [[ "$Win_theme" != "Not Applicable" ]]; then
 					if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
 						if [[ ${BASH_VERSINFO[0]} -eq 4 && ${BASH_VERSINFO[1]} -gt 1 ]] || [[ ${BASH_VERSINFO[0]} -gt 4 ]]; then
-							Win_theme=${Win_theme^}
+							Win_theme="${Win_theme^}"
 						else
 							Win_theme="$(tr '[:lower:]' '[:upper:]' <<< ${Win_theme:0:1})${Win_theme:1}"
 						fi
@@ -1744,6 +1969,22 @@ detectwmtheme () {
 		'SpectrWM') Win_theme="Not Applicable";;
 		'swm') Win_theme="Not Applicable";;
 		'subtle') Win_theme="Not Applicable";;
+		'TWin')
+			if [[ -z $TDE_CONFIG_DIR ]]; then
+				if type -p tde-config >/dev/null 2>&1; then
+					TDE_CONFIG_DIR=$(tde-config --localprefix)
+				fi
+			fi
+			if [[ -n $TDE_CONFIG_DIR ]]; then
+				TDE_CONFIG_DIR=${TDE_CONFIG_DIR%/}
+				if [[ -f $TDE_CONFIG_DIR/share/config/kcmthememanagerrc ]]; then
+					Win_theme=$(awk '/CurrentTheme=/ {gsub(/CurrentTheme=/,"",$0); print $0; exit}' $TDE_CONFIG_DIR/share/config/kcmthememanagerrc)
+				fi
+				if [[ -z $Win_theme ]]; then
+					Win_theme="Not Applicable"
+				fi
+			fi
+		;;
 		'WindowMaker') Win_theme="Not Applicable";;
 		'WMFS') Win_theme="Not Applicable";;
 		'wmii') Win_theme="Not Applicable";;
@@ -1757,9 +1998,13 @@ detectwmtheme () {
 		else
 			Win_theme="Graphite"
 		fi
-	elif [[ "${distro}" == "Cygwin" ]]; then
-		themeFile="$(reg query 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes' /v 'CurrentTheme' | grep -o '[A-Z]:\\.*')"
-		Win_theme=$(echo $themeFile | awk -F"\\" '{print $NF}' | grep -o '[0-9A-z. ]*$' | grep -o '^[0-9A-z ]*')
+	elif [[ "${distro}" == "Cygwin" || "${distro}" == "Msys" ]]; then
+		if [[ "${distro}" == "Msys" ]]; then
+			themeFile="$(reg query 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes' //v 'CurrentTheme')"
+		else
+			themeFile="$(reg query 'HKCU\Software\Microsoft\Windows\CurrentVersion\Themes' /v 'CurrentTheme')"
+		fi
+		Win_theme=$(echo $themeFile| awk -F"\\" '{print $NF}' | sed 's|\.theme$||')
 	fi
 
 	verboseOut "Finding window manager theme...found as '$Win_theme'"
@@ -1779,7 +2024,40 @@ detectgtk () {
 		gtkIcons="Not Applicable"
 		if ps -U ${USER} | grep [F]inder >/dev/null 2>&1; then
 			if [ -f ~/Library/Preferences/com.googlecode.iterm2.plist ]; then
-				gtkFont=$(str1=$(defaults read com.googlecode.iTerm2|grep -m 1 "Normal Font");echo ${str1:29:${#str1}-29-2})
+				# iTerm2
+
+				iterm2_theme_uuid=$(defaults read com.googlecode.iTerm2 "Default Bookmark Guid")
+
+				OLD_IFS=$IFS
+				IFS=$'\n'
+				iterm2_theme_info=($(defaults read com.googlecode.iTerm2 "New Bookmarks" | grep -e Guid -e "Normal Font"))
+				IFS=$OLD_IFS
+
+				for i in $(seq 0 $((${#iterm2_theme_info[*]}/2-1))); do
+					found_uuid=$(str1=${iterm2_theme_info[$i*2]};echo ${str1:16:${#str1}-16-2})
+					if [[ $found_uuid == $iterm2_theme_uuid ]]; then
+						gtkFont=$(str2=${iterm2_theme_info[$i*2+1]};echo ${str2:25:${#str2}-25-2})
+						break
+					fi
+				done
+			else
+				# Terminal.app
+
+				termapp_theme_name=$(defaults read com.apple.Terminal "Default Window Settings")
+
+				OLD_IFS=$IFS
+				IFS=$'\n'
+				termapp_theme_info=($(defaults read com.apple.Terminal "Window Settings" | grep -e "name = " -e "Font = "))
+				IFS=$OLD_IFS
+
+				for i in $(seq 0 $((${#termapp_theme_info[*]}/2-1))); do
+					found_name=$(str1=${termapp_theme_info[$i*2+1]};echo ${str1:15:${#str1}-15-1})
+					if [[ $found_name == $termapp_theme_name ]]; then
+						gtkFont=$(str2=${termapp_theme_info[$i*2]};echo ${str2:288:${#str2}-288})
+						gtkFont=$(echo ${gtkFont%%[dD]2*;} | xxd -r -p)
+						break
+					fi
+				done
 			fi
 		fi
 	else
@@ -1895,27 +2173,28 @@ detectgtk () {
 				fi
 			;;
 			'LXDE'*)
-				if [ -f ${XDG_CONFIG_HOME:-${HOME}/.config}/lxde/config ]; then
+				config_home="${XDG_CONFIG_HOME:-${HOME}/.config}"
+				if [ -f "$config_home/lxde/config" ]; then
 					lxdeconf="/lxde/config"
-				elif [ "$distro" == "Trisquel" ]; then
+				elif [ "$distro" == "Trisquel" ] || [ "$distro" == "FreeBSD" ]; then
 					lxdeconf=""
-				elif [ "$distro" == "FreeBSD" ]; then
-					lxdeconf=""
+				elif [ -f "$config_home/lxsession/Lubuntu/desktop.conf" ]; then
+					lxdeconf="/lxsession/Lubuntu/desktop.conf"
 				else
 					lxdeconf="/lxsession/LXDE/desktop.conf"
 				fi
-				# TODO: Clean me.
-				if grep -q "sNet\/ThemeName" ${XDG_CONFIG_HOME:-${HOME}/.config}$lxdeconf 2>/dev/null; then
-					gtk2Theme=$(awk -F'=' '/sNet\/ThemeName/ {print $2}' ${XDG_CONFIG_HOME:-${HOME}/.config}$lxdeconf)
+
+				if grep -q "sNet\/ThemeName" "${config_home}${lxdeconf}" 2>/dev/null; then
+					gtk2Theme=$(awk -F'=' '/sNet\/ThemeName/ {print $2}' ${config_home}${lxdeconf})
 				fi
 
-				if grep -q IconThemeName ${XDG_CONFIG_HOME:-${HOME}/.config}$lxdeconf 2>/dev/null; then
-					gtkIcons=$(awk -F'=' '/sNet\/IconThemeName/ {print $2}' ${XDG_CONFIG_HOME:-${HOME}/.config}$lxdeconf)
+				if grep -q IconThemeName "${config_home}${lxdeconf}" 2>/dev/null; then
+					gtkIcons=$(awk -F'=' '/sNet\/IconThemeName/ {print $2}' ${config_home}${lxdeconf})
 				fi
 
-				if grep -q FontName ${XDG_CONFIG_HOME:-${HOME}/.config}$lxdeconf 2>/dev/null; then
-					gtkFont=$(awk -F'=' '/sGtk\/FontName/ {print $2}' ${XDG_CONFIG_HOME:-${HOME}/.config}$lxdeconf)
-				fi
+				if grep -q FontName "${config_home}${lxdeconf}" 2>/dev/null; then
+					gtkFont=$(awk -F'=' '/sGtk\/FontName/ {print $2}' ${config_home}${lxdeconf})
+ 				fi
 			;;
 
 			# /home/me/.config/rox.sourceforge.net/ROX-Session/Settings.xml
@@ -1935,16 +2214,21 @@ detectgtk () {
 					fi
 				fi
 				# $HOME/.gtkrc.mine theme detect only
-				if [ -f "$HOME/.gtkrc.mine" ]; then
-					if grep -q "^include" $HOME/.gtkrc.mine; then
-						gtk2Theme=$(grep '^include.*gtkrc' $HOME/.gtkrc.mine | awk -F "/" '{ print $5 }')
+				if [[ -f "$HOME/.gtkrc.mine" ]]; then
+					minegtkrc="$HOME/.gtkrc.mine"
+				elif [[ -f "$HOME/.gtkrc-2.0.mine" ]]; then
+					minegtkrc="$HOME/.gtkrc-2.0.mine"
+				fi
+				if [ -f "$minegtkrc" ]; then
+					if grep -q "^include" "$minegtkrc"; then
+						gtk2Theme=$(grep '^include.*gtkrc' "$minegtkrc" | awk -F "/" '{ print $5 }')
 					fi
-					if grep -q "^gtk-icon-theme-name" $HOME/.gtkrc.mine; then
-						gtkIcons=$(grep '^gtk-icon-theme-name' $HOME/.gtkrc.mine | awk -F '"' '{print $2}')
+					if grep -q "^gtk-icon-theme-name" "$minegtkrc"; then
+						gtkIcons=$(grep '^gtk-icon-theme-name' "$minegtkrc" | awk -F '"' '{print $2}')
 					fi
 				fi
 				# /etc/gtk-2.0/gtkrc compatability
-				if [[ -f /etc/gtk-2.0/gtkrc && ! -f $HOME/.gtkrc-2.0 && ! -f $HOME/.gtkrc.mine ]]; then
+				if [[ -f /etc/gtk-2.0/gtkrc && ! -f "$HOME/.gtkrc-2.0" && ! -f "$HOME/.gtkrc.mine" && ! -f "$HOME/.gtkrc-2.0.mine" ]]; then
 					if grep -q gtk-theme-name /etc/gtk-2.0/gtkrc; then
 						gtk2Theme=$(awk -F'"' '/^gtk-theme-name/ {print $2}' /etc/gtk-2.0/gtkrc)
 					fi
@@ -1979,7 +2263,7 @@ detectgtk () {
 
 				# ROX-Filer icon detect only
 				if [ -a "${XDG_CONFIG_HOME:-${HOME}/.config}/rox.sourceforge.net/ROX-Filer/Options" ]; then
-					gtkIcons=$(awk -F'[>,<]' '/^icon_theme/ {print $3}' ${XDG_CONFIG_HOME:-${HOME}/.config}/rox.sourceforge.net/ROX-Filer/Options)
+					gtkIcons=$(awk -F'[>,<]' '/icon_theme/ {print $3}' ${XDG_CONFIG_HOME:-${HOME}/.config}/rox.sourceforge.net/ROX-Filer/Options)
 				fi
 
 				# E17 detection
@@ -1999,9 +2283,11 @@ detectgtk () {
 					fi
 				fi
 
-				if [ "$distro" == "Cygwin" -a "$gtkFont" == "Not Found" ]; then
-					if [ -f "$HOME/.minttyrc" ]; then
-						gtkFont="$(grep '^Font=.*' "$HOME/.minttyrc" | grep -o '[0-9A-z ]*$')"
+				if [[ "$distro" == "Cygwin" || "$distro" == "Msys" ]]; then
+					if [ "$gtkFont" == "Not Found" ]; then
+						if [ -f "$HOME/.minttyrc" ]; then
+							gtkFont="$(grep '^Font=.*' "$HOME/.minttyrc" | grep -o '[0-9A-z ]*$')"
+						fi
 					fi
 				fi
 			;;
@@ -2044,85 +2330,74 @@ detectdroid () {
 
 takeShot () {
 	if [[ -z $screenCommand ]]; then
-		if [[ "${upload}" == "1" ]]; then
-			shotfiles[1]=${shotfile}
-			if [ "$distro" == "Mac OS X" ]; then 
-				displays="$(system_profiler SPDisplaysDataType | grep 'Resolution:' | wc -l | tr -d ' ')"
-				for (( i=2; i<=$displays; i++))
-				do
-					shotfiles[$i]="$(echo ${shotfile} | sed "s/\(.*\)\./\1_${i}./")"
-				done
-				printf "Taking shot in 3.. "; sleep 1; printf "2.. "; sleep 1; printf "1.. "; sleep 1; printf "0.\n"; screencapture -x ${shotfiles[@]} &> /dev/null
-			else scrot -cd3 "${shotfile}"; fi
-			if [ -f "${shotfile}" ]; then
-				verboseOut "Screenshot saved at '${shotfiles[@]}'"
-				printf "${bold}==>${c0}  Uploading your screenshot now..."
-				case "${uploadLoc}" in
-					'teknik')
-						baseurl='https://u.teknik.io'
-						uploadurl='https://api.teknik.io/upload/post'
-						ret=$(curl -sf -F file="@${shotfiles[@]}" ${uploadurl})
-						desturl="${ret##*url\":\"}"
-						desturl="${desturl%%\"*}"
-						desturl="${desturl//\\}"
-					;;
-					'mediacrush')
-						baseurl='https://mediacru.sh'
-						uploadurl='https://mediacru.sh/api/upload/file'
-						ret=$(curl -sf -F file="@${shotfiles[@]};type=image/png" ${uploadurl})
-						filehash=$(echo "${ret}" | grep "hash" | cut -d '"' -f4)
-						desturl="${baseurl}/${filehash}"
-					;;
-					'imgur')
-						baseurl='http://imgur.com'
-						uploadurl='http://imgur.com/upload'
-						ret=$(curl -sf -F file="@${shotfiles[@]}" ${uploadurl})
-						filehash="${ret##*hash\":\"}"
-						filehash="${filehash%%\"*}"
-						desturl="${baseurl}/${filehash}"
-					;;
-					'pomf')
-						baseurl='http://a.pomf.se'
-						uploadurl='http://pomf.se/upload.php'
-						ret=$(curl --silent -sf -F files[]="@${shotfiles[@]}" ${uploadurl})
-						filehash="${ret##*url\":\"}"
-						filehash="${filehash%%\"*}"
-						desturl="${baseurl}/${filehash}"
-					;;
-					'hmp')
-						baseurl='http://i.hmp.me/m'
-						uploadurl='http://hmp.me/ap/?uf=1'
-						ret=$(curl -sf -F a="@${shotfiles[@]};type=image/png" ${uploadurl})
-						desturl="${ret##*img_path\":\"}"
-						desturl="${desturl%%\"*}"
-						desturl="${desturl//\\}"
-					;;
-					'local-example')
-						baseurl="http://www.example.com"
-						serveraddr="www.example.com"
-						scptimeout="20"
-						serverdir="/path/to/directory"
-						scp -qo ConnectTimeout="${scptimeout}" "${shotfiles[@]}" "${serveraddr}:${serverdir}"
-						desturl="${baseurl}/${shotfile}"
-					;;
-				esac		
-				printf "your screenshot can be viewed at ${desturl}\n"
+		shotfiles[1]=${shotfile}
+		if [ "$distro" == "Mac OS X" ]; then
+			displays="$(system_profiler SPDisplaysDataType | grep 'Resolution:' | wc -l | tr -d ' ')"
+			for (( i=2; i<=$displays; i++))
+			do
+				shotfiles[$i]="$(echo ${shotfile} | sed "s/\(.*\)\./\1_${i}./")"
+			done
+			printf "Taking shot in 3.. "; sleep 1; printf "2.. "; sleep 1; printf "1.. "; sleep 1; printf "0.\n"; screencapture -x ${shotfiles[@]} &> /dev/null
+		else
+			if type -p scrot >/dev/null 2>&1; then
+				scrot -cd3 "${shotfile}"
 			else
-				errorOut "ERROR: Problem saving screenshot to ${shotfiles[@]}"
+				errorOut "Cannot take screenshot! \`scrot' not in \$PATH"
+			fi
+		fi
+		if [ -f "${shotfile}" ]; then
+			verboseOut "Screenshot saved at '${shotfiles[@]}'"
+			if [[ "${upload}" == "1" ]]; then
+				if type -p curl >/dev/null 2>&1; then
+					printf "${bold}==>${c0}  Uploading your screenshot now..."
+					case "${uploadLoc}" in
+						'teknik')
+							baseurl='https://u.teknik.io'
+							uploadurl='https://api.teknik.io/upload/post'
+							ret=$(curl -sf -F file="@${shotfiles[@]}" ${uploadurl})
+							desturl="${ret##*url\":\"}"
+							desturl="${desturl%%\"*}"
+							desturl="${desturl//\\}"
+						;;
+						'mediacrush')
+							baseurl='https://mediacru.sh'
+							uploadurl='https://mediacru.sh/api/upload/file'
+							ret=$(curl -sf -F file="@${shotfiles[@]};type=image/png" ${uploadurl})
+							filehash=$(echo "${ret}" | grep "hash" | cut -d '"' -f4)
+							desturl="${baseurl}/${filehash}"
+						;;
+						'imgur')
+							baseurl='http://imgur.com'
+							uploadurl='http://imgur.com/upload'
+							ret=$(curl -sf -F file="@${shotfiles[@]}" ${uploadurl})
+							filehash="${ret##*hash\":\"}"
+							filehash="${filehash%%\"*}"
+							desturl="${baseurl}/${filehash}"
+						;;
+						'hmp')
+							baseurl='http://i.hmp.me/m'
+							uploadurl='http://hmp.me/ap/?uf=1'
+							ret=$(curl -sf -F a="@${shotfiles[@]};type=image/png" ${uploadurl})
+							desturl="${ret##*img_path\":\"}"
+							desturl="${desturl%%\"*}"
+							desturl="${desturl//\\}"
+						;;
+						'local-example')
+							baseurl="http://www.example.com"
+							serveraddr="www.example.com"
+							scptimeout="20"
+							serverdir="/path/to/directory"
+							scp -qo ConnectTimeout="${scptimeout}" "${shotfiles[@]}" "${serveraddr}:${serverdir}"
+							desturl="${baseurl}/${shotfile}"
+						;;
+					esac
+					printf "your screenshot can be viewed at ${desturl}\n"
+				else
+					errorOut "Cannot upload screenshot! \`curl' not in \$PATH"
+				fi
 			fi
 		else
-			shotfiles[1]=${shotfile}
-			if [ "$distro" == "Mac OS X" ]; then 
-				displays="$(system_profiler SPDisplaysDataType | grep 'Resolution:' | wc -l | tr -d ' ')"
-				for (( i=2; i<=$displays; i++))
-				do
-					shotfiles[$i]="$(echo ${shotfile} | sed "s/\(.*\)\./\1_${i}./")"
-				done
-				printf "Taking shot in 3.. "; sleep 1; printf "2.. "; sleep 1; printf "1.. "; sleep 1; printf "0.\n"; screencapture -x ${shotfiles[@]} &> /dev/null
-			else scrot -cd3 "${shotfile}"; fi
-			if [ -f "${shotfile}" ]; then
-				verboseOut "Screenshot saved at '${shotfiles[@]}'"
-			else
+			if type -p scrot >/dev/null 2>&1; then
 				errorOut "ERROR: Problem saving screenshot to ${shotfiles[@]}"
 			fi
 		fi
@@ -2135,12 +2410,39 @@ takeShot () {
 
 asciiText () {
 # Distro logos and ASCII outputs
-	if [[ "$fake_distro" ]]; then distro="${fake_distro}"; fi
 	if [[ "$asc_distro" ]]; then myascii="${asc_distro}"
 	elif [[ "$art" ]]; then myascii="custom"
+	elif [[ "$fake_distro" ]]; then myascii="${fake_distro}"
 	else myascii="${distro}"; fi
 	case ${myascii} in
 		"custom") source "$art" ;;
+
+		"Alpine Linux")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'light blue') # Light
+				c2=$(getColor 'blue') # Dark
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c1}        ................          %s"
+"${c1}       ∴::::::::::::::::∴         %s"
+"${c1}      ∴::::::::::::::::::∴        %s"
+"${c1}     ∴::::::::::::::::::::∴       %s"
+"${c1}    ∴:::::::. :::::':::::::∴      %s"
+"${c1}   ∴:::::::.   ;::; ::::::::∴     %s"
+"${c1}  ∴::::::;      ∵     :::::::∴    %s"
+"${c1} ∴:::::.     .         .::::::∴   %s"
+"${c1} ::::::     :::.    .    ::::::   %s"
+"${c1} ∵::::     ::::::.  ::.   ::::∵   %s"
+"${c1}  ∵:..   .:;::::::: :::.  :::∵    %s"
+"${c1}   ∵::::::::::::::::::::::::∵     %s"
+"${c1}    ∵::::::::::::::::::::::∵      %s"
+"${c1}     ∵::::::::::::::::::::∵       %s"
+"${c1}      ::::::::::::::::::::        %s"
+"${c1}       ∵::::::::::::::::∵         %s")
+		;;
+
 		"Arch Linux - Old")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'white') # White
@@ -2148,7 +2450,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c1              __                      %s"
+			fulloutput=(
+"$c1              __                     %s"
 "$c1          _=(SDGJT=_                 %s"
 "$c1        _GTDJHGGFCVS)                %s"
 "$c1       ,GTDJGGDTDFBGX0               %s"
@@ -2175,8 +2478,9 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="1"
-			fulloutput=("${c1}                   -\`"
-"${c1}                  .o+\`                 %s"
+			fulloutput=(
+"${c1}                   -\`"
+"${c1}                  .o+\`                %s"
 "${c1}                 \`ooo/                %s"
 "${c1}                \`+oooo:               %s"
 "${c1}               \`+oooooo:              %s"
@@ -2203,7 +2507,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("                                       %s"
+			fulloutput=(
+"                                      %s"
 "$c2 MMMMMMMMMMMMMMMMMMMMMMMMMmds+.       %s"
 "$c2 MMm----::-://////////////oymNMd+\`    %s"
 "$c2 MMd      "$c1"/++                "$c2"-sNMd:   %s"
@@ -2223,7 +2528,6 @@ asciiText () {
 "                                      %s")
 		;;
 
-
 		"LMDE")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'white') # White
@@ -2231,7 +2535,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("          "${c1}"\`.-::---..            %s"
+			fulloutput=(
+"${c1}          \`.-::---..           %s"
 "${c2}       .:++++ooooosssoo:.      %s"
 "${c2}     .+o++::.      \`.:oos+.    %s"
 "${c2}    :oo:.\`             -+oo"${c1}":   %s"
@@ -2259,7 +2564,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c2                          ./+o+-       %s"
+			fulloutput=(
+"$c2                          ./+o+-      %s"
 "$c1                  yyyyy- $c2-yyyyyy+     %s"
 "$c1               $c1://+//////$c2-yyyyyyo     %s"
 "$c3           .++ $c1.:/++++++/-$c2.+sss/\`     %s"
@@ -2279,6 +2585,34 @@ asciiText () {
 "$c3                          \`oo++.      %s")
 		;;
 
+		"KDE neon")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'light green') # Bold Green
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"$c1              \`..---+/---..\`               %s"
+"$c1          \`---.\`\`   \`\`   \`.---.\`           %s"
+"$c1       .--.\`        \`\`        \`-:-.        %s"
+"$c1     \`:/:     \`.----//----.\`     :/-       %s"
+"$c1    .:.    \`---\`          \`--.\`    .:\`     %s"
+"$c1   .:\`   \`--\`                .:-    \`:.    %s"
+"$c1  \`/    \`:.      \`.-::-.\`      -:\`   \`/\`   %s"
+"$c1  /.    /.     \`:++++++++:\`     .:    .:   %s"
+"$c1 \`/    .:     \`+++++++++++/      /\`   \`+\`  %s"
+"$c1 /+\`   --     .++++++++++++\`     :.   .+:  %s"
+"$c1 \`/    .:     \`+++++++++++/      /\`   \`+\`  %s"
+"$c1  /\`    /.     \`:++++++++:\`     .:    .:   %s"
+"$c1  ./    \`:.      \`.:::-.\`      -:\`   \`/\`   %s"
+"$c1   .:\`   \`--\`                .:-    \`:.    %s"
+"$c1    .:.    \`---\`          \`--.\`    .:\`     %s"
+"$c1     \`:/:     \`.----//----.\`     :/-       %s"
+"$c1       .-:.\`        \`\`        \`-:-.        %s"
+"$c1          \`---.\`\`   \`\`   \`.---.\`           %s"
+"$c1              \`..---+/---..\`               %s")
+		;;
+
 		"Debian")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'white') # White
@@ -2286,7 +2620,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-                        fulloutput=("  $c1       _,met\$\$\$\$\$gg.           %s"
+			fulloutput=(
+"  $c1       _,met\$\$\$\$\$gg.          %s"
 "  $c1    ,g\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$P.       %s"
 "  $c1  ,g\$\$P\"\"       \"\"\"Y\$\$.\".     %s"
 "  $c1 ,\$\$P'              \`\$\$\$.     %s"
@@ -2306,7 +2641,6 @@ asciiText () {
 "                                %s")
 		;;
 
-
 		"Raspbian")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'light green') # Light Green
@@ -2314,7 +2648,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-                        fulloutput=(" $c1   .',;:cc;,'.    .,;::c:,,.    %s"
+			fulloutput=(
+" $c1   .',;:cc;,'.    .,;::c:,,.   %s"
 "   $c1,ooolcloooo:  'oooooccloo:   %s"
 "   $c1.looooc;;:ol  :oc;;:ooooo'   %s"
 "     $c1;oooooo:      ,ooooooc.    %s"
@@ -2334,14 +2669,14 @@ asciiText () {
 "             $c2......       %s")
 		;;
 
-
 		"CrunchBang")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'white') # White
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-            fulloutput=("                                       %s"
+			fulloutput=(
+"                                      %s"
 "$c2         "$c1"███"$c2"        "$c1"███"$c2"          "$c1"███"$c2"  %s"
 "$c2         "$c1"███"$c2"        "$c1"███"$c2"          "$c1"███"$c2"  %s"
 "$c2         "$c1"███"$c2"        "$c1"███"$c2"          "$c1"███"$c2"  %s"
@@ -2370,7 +2705,7 @@ asciiText () {
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="1"
 			fulloutput=(""
-"${c1}          odddd             %s"
+"${c1}          odddd            %s"
 "${c1}       oddxkkkxxdoo        %s"
 "${c1}      ddcoddxxxdoool       %s"
 "${c1}      xdclodod  olol       %s"
@@ -2391,7 +2726,7 @@ asciiText () {
 "")
 		;;
 
-		"ChromeOS")
+		"Chrome OS")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'green') # Green
 				c2=$(getColor 'light red') # Light Red
@@ -2401,7 +2736,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; c4="${my_lcolor}"; c5="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c2             .,:loool:,.               %s"
+			fulloutput=(
+"$c2             .,:loool:,.              %s"
 "$c2         .,coooooooooooooc,.          %s"
 "$c2      .,lllllllllllllllllllll,.       %s"
 "$c2     ;ccccccccccccccccccccccccc;      %s"
@@ -2419,7 +2755,6 @@ asciiText () {
 "$c1       '::ccccccccc${c3}dOOOOOOOkx:.       %s"
 "$c1         ..,::cccc${c3}xOOOkkko;.          %s"
 "$c1             ..,:${c3}dOkxl:.              %s")
-
 		;;
 
 		"Gentoo")
@@ -2429,7 +2764,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c2         -/oyddmdhs+:.                %s"
+			fulloutput=(
+"$c2         -/oyddmdhs+:.               %s"
 "$c2     -o"$c1"dNMMMMMMMMNNmhy+"$c2"-\`            %s"
 "$c2   -y"$c1"NMMMMMMMMMMMNNNmmdhy"$c2"+-          %s"
 "$c2 \`o"$c1"mMMMMMMMMMMMMNmdmmmmddhhy"$c2"/\`       %s"
@@ -2449,7 +2785,6 @@ asciiText () {
 "$c2  \`-//////:--.                       %s")
 		;;
 
-
 		"Funtoo")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'white') # White
@@ -2457,7 +2792,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("                                                     %s"
+			fulloutput=(
+"                                                    %s"
 "                                                    %s"
 "                                                    %s"
 "                                                    %s"
@@ -2477,6 +2813,35 @@ asciiText () {
 "                                                    %s")
 		;;
 
+		"Kogaion")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'light blue') # Light Blue
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c1}                  ;;      ,;             %s"
+"${c1}                 ;;;     ,;;             %s"
+"${c1}               ,;;;;     ;;;;            %s"
+"${c1}            ,;;;;;;;;    ;;;;            %s"
+"${c1}           ;;;;;;;;;;;   ;;;;;           %s"
+"${c1}          ,;;;;;;;;;;;;  ';;;;;,         %s"
+"${c1}          ;;;;;;;;;;;;;;, ';;;;;;;       %s"
+"${c1}          ;;;;;;;;;;;;;;;;;, ';;;;;      %s"
+"${c1}      ;    ';;;;;;;;;;;;;;;;;;, ;;;      %s"
+"${c1}      ;;;,  ';;;;;;;;;;;;;;;;;;;,;;      %s"
+"${c1}      ;;;;;,  ';;;;;;;;;;;;;;;;;;,       %s"
+"${c1}      ;;;;;;;;,  ';;;;;;;;;;;;;;;;,      %s"
+"${c1}      ;;;;;;;;;;;;, ';;;;;;;;;;;;;;      %s"
+"${c1}      ';;;;;;;;;;;;; ';;;;;;;;;;;;;      %s"
+"${c1}       ';;;;;;;;;;;;;, ';;;;;;;;;;;      %s"
+"${c1}        ';;;;;;;;;;;;;  ;;;;;;;;;;       %s"
+"${c1}          ';;;;;;;;;;;; ;;;;;;;;         %s"
+"${c1}              ';;;;;;;; ;;;;;;           %s"
+"${c1}                 ';;;;; ;;;;             %s"
+"${c1}                   ';;; ;;               ")
+		;;
+
 		"Fedora")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'white') # White
@@ -2484,7 +2849,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c2           /:-------------:\          %s"
+			fulloutput=(
+"$c2           /:-------------:\         %s"
 "$c2        :-------------------::       %s"
 "$c2      :-----------"$c1"/shhOHbmp"$c2"---:\\     %s"
 "$c2    /-----------"$c1"omMMMNNNMMD  "$c2"---:    %s"
@@ -2511,7 +2877,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c2               .-/-.                %s"
+			fulloutput=(
+"$c2               .-/-.               %s"
 "$c2             ////////.             %s"
 "$c2           ////////"$c1"y+"$c2"//.           %s"
 "$c2         ////////"$c1"mMN"$c2"/////.         %s"
@@ -2530,7 +2897,6 @@ asciiText () {
 "$c2        \`////////////////.         %s"
 "$c2            -////////-            %s"
 "                                  %s")
-
 		;;
 
 		"Korora")
@@ -2540,7 +2906,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c1                 ____________    %s"
+			fulloutput=(
+"$c1                 ____________   %s"
 "$c1              _add55555555554"$c2":  %s"
 "$c1            _w?'"$c2"\`\`\`\`\`\`\`\`\`\`'"$c1")k"$c2":  %s"
 "$c1           _Z'"$c2"\`"$c1"            ]k"$c2":  %s"
@@ -2564,7 +2931,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="0"
-                        fulloutput=("$c1                      ..,,,,..                       %s"
+			fulloutput=(
+"$c1                      ..,,,,..                      %s"
 "$c1                .oocchhhhhhhhhhccoo.                %s"
 "$c1         .ochhlllllllc hhhhhh ollllllhhco.          %s"
 "$c1     ochlllllllllll hhhllllllhhh lllllllllllhco     %s"
@@ -2585,7 +2953,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c1              d                      %s"
+			fulloutput=(
+"$c1              d                     %s"
 "$c1             ,MK:                   %s"
 "$c1             xMMMX:                 %s"
 "$c1            .NMMMMMX;               %s"
@@ -2611,25 +2980,25 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("                                      %s"   # user@host
-"   "$c1"\`\`\`                        "$c2"\`      %s"      # OS
-"  "$c1"\` \`.....---..."$c2"....--.\`\`\`   -/      %s"     # Kernel
-"  "$c1"+o   .--\`         "$c2"/y:\`      +.     %s"        # Uptime
-"  "$c1" yo\`:.            "$c2":o      \`+-      %s"        # Packages
-"    "$c1"y/               "$c2"-/\`   -o/       %s"         # Shell
-"   "$c1".-                  "$c2"::/sy+:.      %s"          # Resolution
-"   "$c1"/                     "$c2"\`--  /      %s"         # DE
-"  "$c1"\`:                          "$c2":\`     %s"        # WM
-"  "$c1"\`:                          "$c2":\`     %s"        # WM Theme
-"   "$c1"/                          "$c2"/      %s"          # GTK2 Theme
-"   "$c1".-                        "$c2"-.      %s"          # GTK3 Theme
-"    "$c1"--                      "$c2"-.       %s"          # Icon Theme
-"     "$c1"\`:\`                  "$c2"\`:\`        %s"      # Font
-"       "$c2".--             \`--.          %s"              # Disk
-"         "$c2" .---.....----.             %s"               # CPU
-"                                     %s"                    # GPU
-"                                     %s"                    # RAM
-)
+			fulloutput=(
+"                                     %s"
+"   "$c1"\`\`\`                        "$c2"\`      %s"
+"  "$c1"\` \`.....---..."$c2"....--.\`\`\`   -/      %s"
+"  "$c1"+o   .--\`         "$c2"/y:\`      +.     %s"
+"  "$c1" yo\`:.            "$c2":o      \`+-      %s"
+"    "$c1"y/               "$c2"-/\`   -o/       %s"
+"   "$c1".-                  "$c2"::/sy+:.      %s"
+"   "$c1"/                     "$c2"\`--  /      %s"
+"  "$c1"\`:                          "$c2":\`     %s"
+"  "$c1"\`:                          "$c2":\`     %s"
+"   "$c1"/                          "$c2"/      %s"
+"   "$c1".-                        "$c2"-.      %s"
+"    "$c1"--                      "$c2"-.       %s"
+"     "$c1"\`:\`                  "$c2"\`:\`        %s"
+"       "$c2".--             \`--.          %s"
+"         "$c2" .---.....----.             %s"
+"                                     %s"
+"                                     %s")
 		;;
 
 		"FreeBSD - Old")
@@ -2639,24 +3008,25 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c2              ,        ,           %s"   # user@host
-"$c2             /(        )\`         %s"                 # OS
-"$c2             \ \___   / |         %s"                  # Kernel
-"$c2             /- "$c1"_$c2  \`-/  '         %s"         # Uptime
-"$c2            ($c1/\/ \ $c2\   /\\         %s"           # Packages
-"$c1            / /   |$c2 \`    \\        %s"             # Shell
-"$c1            O O   )$c2 /    |        %s"               # Resolution
-"$c1            \`-^--'\`$c2<     '        %s"             # DE
-"$c2           (_.)  _  )   /         %s"                  # WM
-"$c2            \`.___/\`    /          %s"                # WM Theme
-"$c2              \`-----' /           %s"                 # GTK2 Theme
-"$c1 <----.     "$c2"__/ __   \\            %s"            # GTK3 Theme
-"$c1 <----|===="$c2"O}}}$c1==$c2} \} \/$c1====      %s"    # Icon Theme
-"$c1 <----'    $c2\`--' \`.__,' \\          %s"            # Font
-"$c2              |        |          %s"                  # Disk
-"$c2               \       /       /\\ %s"                 # CPU
-"$c2          ______( (_  / \______/  %s"                  # GPU
-"$c2        ,'  ,-----'   |           %s"                  # RAM
+			fulloutput=(
+"$c2              ,        ,          %s"
+"$c2             /(        )\`         %s"
+"$c2             \ \___   / |         %s"
+"$c2             /- "$c1"_$c2  \`-/  '         %s"
+"$c2            ($c1/\/ \ $c2\   /\\         %s"
+"$c1            / /   |$c2 \`    \\        %s"
+"$c1            O O   )$c2 /    |        %s"
+"$c1            \`-^--'\`$c2<     '        %s"
+"$c2           (_.)  _  )   /         %s"
+"$c2            \`.___/\`    /          %s"
+"$c2              \`-----' /           %s"
+"$c1 <----.     "$c2"__/ __   \\            %s"
+"$c1 <----|===="$c2"O}}}$c1==$c2} \} \/$c1====      %s"
+"$c1 <----'    $c2\`--' \`.__,' \\          %s"
+"$c2              |        |          %s"
+"$c2               \       /       /\\ %s"
+"$c2          ______( (_  / \______/  %s"
+"$c2        ,'  ,-----'   |           %s"
 "$c2        \`--{__________)"
 "")
 		;;
@@ -2675,7 +3045,7 @@ asciiText () {
 "                                       "$c3" _      "
 "                                       "$c3"(_)      "
 ""$c1"              |    .                            "
-""$c1"          .   |L  /|   .         "$c3" _      %s"
+""$c1"          .   |L  /|   .         "$c3" _     %s"
 ""$c1"      _ . |\ _| \--+._/| .       "$c3"(_)    %s"
 ""$c1"     / ||\| Y J  )   / |/| ./           %s"
 ""$c1"    J  |)'( |        \` F\`.'/       "$c3" _   %s"
@@ -2694,8 +3064,7 @@ asciiText () {
 ""$c1"   |/\`. \`-.     \`._)                    %s"
 ""$c1"      / .-.\                            %s"
 ""$c1"      \ (  \`\                           "
-""$c1"       \`.\                                  "
-)
+""$c1"       \`.\                                  ")
 		;;
 
 		"DragonFlyBSD")
@@ -2706,7 +3075,8 @@ asciiText () {
 				c4=$(getColor 'light red')
 			fi
 			startline="0"
-			fulloutput=("                     "$c1" |                     %s"
+			fulloutput=(
+"                     "$c1" |                    %s"
 "                    "$c1" .-.                   %s"
 "                   "$c3" ()"$c1"I"$c3"()                  %s"
 "              "$c1" \"==.__:-:__.==\"             %s"
@@ -2723,18 +3093,17 @@ asciiText () {
 " "$c2"   \`~\"~\"\`        "$c1"   |=|"$c2"           \`\"~\"~\`  %s"
 "                   "$c1"  /=\                   %s"
 "                   "$c1"  \=/                   %s"
-"                   "$c1"   ^                    %s"
-)
+"                   "$c1"   ^                    %s")
 		;;
 
 		"NetBSD")
 			if [[ "$no_color" != "1" ]]; then
-				c1=$(getColor 'light red') # Light Red
+				c1=$(getColor 'orange') # Orange
 				c2=$(getColor 'white') # White
 			fi
 			startline="0"
 			fulloutput=(
-"                                  "$c1"__,gnnnOCCCCCOObaau,_      %s"
+"                                  "$c1"__,gnnnOCCCCCOObaau,_     %s"
 "   "$c2"_._                    "$c1"__,gnnCCCCCCCCOPF\"''              %s"
 "  "$c2"(N\\\\\\\\"$c1"XCbngg,._____.,gnnndCCCCCCCCCCCCF\"___,,,,___          %s"
 "   "$c2"\\\\N\\\\\\\\"$c1"XCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCOOOOPYvv.     %s"
@@ -2763,7 +3132,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("                                          %s"
+			fulloutput=(
+"                                         %s"
 "$c2                         \`\`              %s"
 "$c2                        \`-.              %s"
 "$c1       \`               $c2.---              %s"
@@ -2783,31 +3153,32 @@ asciiText () {
 "                                         %s")
 		;;
 
-		"openSUSE")
+		"openSUSE"|"SUSE Linux Enterprise")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'light green') # Bold Green
-				c2=$(getColor 'white') # Bold White
+				c2=$c0$bold
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c2             .;ldkO0000Okdl;.                %s"
-"$c2         .;d00xl:,'....';:ok00d;.           %s"
-"$c2       .d00l'                ,o00d.         %s"
-"$c2     .d0Kd."$c1" :Okxol:;'.          "$c2":O0d.       %s"
-"$c2    'OK"$c1"KKK0kOKKKKKKKKKKOxo:'      "$c2"lKO'      %s"
-"$c2   ,0K"$c1"KKKKKKKKKKKKKKK0d:"$c2",,,"$c1":dx:"$c2"    ;00,     %s"
-"$c2  .OK"$c1"KKKKKKKKKKKKKKKk."$c2".oOkdl."$c1"'0k."$c2"   cKO.    %s"
-"$c2  :KK"$c1"KKKKKKKKKKKKKKK: "$c2"kKx..od "$c1"lKd"$c2"   .OK:    %s"
-"$c2  dKK"$c1"KKKKKKKKKOx0KKKd "$c2";0KKKO, "$c1"kKKc"$c2"   dKd    %s"
-"$c2  dKK"$c1"KKKKKKKKKK;.;oOKx,.."$c2"'"$c1"..;kKKK0."$c2"  dKd    %s"
-"$c2  :KK"$c1"KKKKKKKKKK0o;...;cdxxOK0Oxc,.  "$c2".0K:    %s"
-"$c2   kKK"$c1"KKKKKKKKKKKKK0xl;'......,cdo  "$c2"lKk     %s"
-"$c2   '0K"$c1"KKKKKKKKKKKKKKKKKKKK00KKOo;  "$c2"c00'     %s"
-"$c2    .kK"$c1"KKOxddxkOO00000Okxoc;'.   "$c2".dKk.      %s"
-"$c2      l0Ko.                    .c00l.       %s"
-"$c2       .l0Kk:.              .;xK0l.         %s"
-"$c2          ,lkK0xl:;,,,,;:ldO0kl,            %s"
-"$c2              .':ldxkkkkxdl:'.              %s")
+			fulloutput=(
+"$c2             .;ldkO0000Okdl;.               %s"
+"$c2         .;d00xl:^''''''^:ok00d;.           %s"
+"$c2       .d00l'                'o00d.         %s"
+"$c2     .d0Kd'"$c1"  Okxol:;,.          "$c2":O0d.       %s"
+"$c2    .OK"$c1"KKK0kOKKKKKKKKKKOxo:,      "$c2"lKO.      %s"
+"$c2   ,0K"$c1"KKKKKKKKKKKKKKK0P^"$c2",,,"$c1"^dx:"$c2"    ;00,     %s"
+"$c2  .OK"$c1"KKKKKKKKKKKKKKKk'"$c2".oOPPb."$c1"'0k."$c2"   cKO.    %s"
+"$c2  :KK"$c1"KKKKKKKKKKKKKKK: "$c2"kKx..dd "$c1"lKd"$c2"   'OK:    %s"
+"$c2  dKK"$c1"KKKKKKKKKOx0KKKd "$c2"^0KKKO' "$c1"kKKc"$c2"   dKd    %s"
+"$c2  dKK"$c1"KKKKKKKKKK;.;oOKx,.."$c2"^"$c1"..;kKKK0."$c2"  dKd    %s"
+"$c2  :KK"$c1"KKKKKKKKKK0o;...^cdxxOK0O/^^'  "$c2".0K:    %s"
+"$c2   kKK"$c1"KKKKKKKKKKKKK0x;,,......,;od  "$c2"lKk     %s"
+"$c2   '0K"$c1"KKKKKKKKKKKKKKKKKKKK00KKOo^  "$c2"c00'     %s"
+"$c2    'kK"$c1"KKOxddxkOO00000Okxoc;''   "$c2".dKk'      %s"
+"$c2      l0Ko.                    .c00l'       %s"
+"$c2       'l0Kk:.              .;xK0l'         %s"
+"$c2          'lkK0xl:;,,,,;:ldO0kl'            %s"
+"$c2              '^:ldxkkkkxdl:^'              %s")
 		;;
 
 		"Slackware")
@@ -2817,8 +3188,9 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="1"
-			fulloutput=("$c1                   :::::::"
-"$c1             :::::::::::::::::::               %s"
+			fulloutput=(
+"$c1                   :::::::"
+"$c1             :::::::::::::::::::              %s"
 "$c1          :::::::::::::::::::::::::           %s"
 "$c1        ::::::::"${c2}"cllcccccllllllll"${c1}"::::::        %s"
 "$c1     :::::::::"${c2}"lc               dc"${c1}":::::::      %s"
@@ -2847,7 +3219,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("                                           %s"
+			fulloutput=(
+"                                          %s"
 "$c2              \`.-..........\`              %s"
 "$c2             \`////////::.\`-/.             %s"
 "$c2             -: ....-////////.            %s"
@@ -2874,10 +3247,11 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="3"
-			fulloutput=("${c2}          \`++/::-.\`"
+			fulloutput=(
+"${c2}          \`++/::-.\`"
 "${c2}         /o+++++++++/::-.\`"
 "${c2}        \`o+++++++++++++++o++/::-.\`"
-"${c2}        /+++++++++++++++++++++++oo++/:-.\`\`         %s"
+"${c2}        /+++++++++++++++++++++++oo++/:-.\`\`        %s"
 "${c2}       .o+ooooooooooooooooooosssssssso++oo++/:-\`  %s"
 "${c2}       ++osoooooooooooosssssssssssssyyo+++++++o:  %s"
 "${c2}      -o+ssoooooooooooosssssssssssssyyo+++++++s\`  %s"
@@ -2899,7 +3273,6 @@ asciiText () {
 "${c2}                                .-:+++\`")
 		;;
 
-
 		"Peppermint")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'white') # White
@@ -2907,7 +3280,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("${c2}             8ZZZZZZ"${c1}"MMMMM               %s"
+			fulloutput=(
+"${c2}             8ZZZZZZ"${c1}"MMMMM              %s"
 "${c2}          .ZZZZZZZZZ"${c1}"MMMMMMM.           %s"
 "${c1}        MM"${c2}"ZZZZZZZZZ"${c1}"MMMMMMM"${c2}"ZZZZ         %s"
 "${c1}      MMMMM"${c2}"ZZZZZZZZ"${c1}"MMMMM"${c2}"ZZZZZZZM       %s"
@@ -2935,7 +3309,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("${c1}               e         e      %s"
+			fulloutput=(
+"${c1}               e         e     %s"
 "${c1}             eee       ee      %s"
 "${c1}            eeee     eee       %s"
 "${c2}        wwwwwwwww"${c1}"eeeeee        %s"
@@ -2962,7 +3337,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("$c2               .°°.               %s"
+			fulloutput=(
+"$c2               .°°.              %s"
 "$c2                °°   .°°.        %s"
 "$c2                .°°°. °°         %s"
 "$c2                .   .            %s"
@@ -2983,7 +3359,6 @@ asciiText () {
 "$c1               .,KKKK,.            ")
 		;;
 
-
 		"Parabola GNU/Linux-libre")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'light purple') # Light Purple
@@ -2991,7 +3366,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("                                  %s"
+			fulloutput=(
+"                                 %s"
 "${c1}              eeeeeeeee          %s"
 "${c1}          eeeeeeeeeeeeeee        %s"
 "${c1}       eeeeee"${c2}"//////////"${c1}"eeeee     %s"
@@ -3011,7 +3387,6 @@ asciiText () {
 "${c1}          e                      %s")
 		;;
 
-
 		"Viperr")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'white') # White
@@ -3019,7 +3394,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("${c1}    wwzapd         dlzazw       %s"
+			fulloutput=(
+"${c1}    wwzapd         dlzazw      %s"
 "${c1}   an"${c2}"#"${c1}"zncmqzepweeirzpas"${c2}"#"${c1}"xz     %s"
 "${c1} apez"${c2}"##"${c1}"qzdkawweemvmzdm"${c2}"##"${c1}"dcmv   %s"
 "${c1}zwepd"${c2}"####"${c1}"qzdweewksza"${c2}"####"${c1}"ezqpa  %s"
@@ -3039,14 +3415,14 @@ asciiText () {
 "                               %s")
 		;;
 
-
 		"LinuxDeepin")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'light green') # Bold Green
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("${c1}  eeeeeeeeeeeeeeeeeeeeeeeeeeee    %s"
+			fulloutput=(
+"${c1}  eeeeeeeeeeeeeeeeeeeeeeeeeeee   %s"
 "${c1} eee  eeeeeee          eeeeeeee  %s"
 "${c1}ee   eeeeeeeee      eeeeeeeee ee %s"
 "${c1}e   eeeeeeeee     eeeeeeeee    e %s"
@@ -3073,7 +3449,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="0"
-                        fulloutput=("${c1}              ............                %s"
+			fulloutput=(
+"${c1}              ............               %s"
 "${c1}          .';;;;;.       .,;,.           %s"
 "${c1}       .,;;;;;;;.       ';;;;;;;.        %s"
 "${c1}     .;::::::::'     .,::;;,''''',.      %s"
@@ -3091,7 +3468,7 @@ asciiText () {
 "${c1}       ,dkkkkkkkkkkkkko;.    .;o;        %s"
 "${c1}         .;okkkkkdl;.    .,cl:.          %s"
 "${c1}             .,:cccccccc:,.  %s")
-                ;;
+		;;
 
 		"Chakra")
 			if [[ "$no_color" != "1" ]]; then
@@ -3099,7 +3476,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("${c1}      _ _ _        \"kkkkkkkk.          %s"
+			fulloutput=(
+"${c1}      _ _ _        \"kkkkkkkk.         %s"
 "${c1}    ,kkkkkkkk.,    \'kkkkkkkkk,        %s"
 "${c1}    ,kkkkkkkkkkkk., \'kkkkkkkkk.       %s"
 "${c1}   ,kkkkkkkkkkkkkkkk,\'kkkkkkkk,       %s"
@@ -3119,7 +3497,6 @@ asciiText () {
 "${c1}                   \"\'\'\"               %s")
 		;;
 
-
 		"Fuduntu")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'dark grey') # Dark Gray
@@ -3129,8 +3506,9 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="1"
-			fulloutput=("${c1}       \`dwoapfjsod\`"${c2}"           \`dwoapfjsod\`"
-"${c1}    \`xdwdsfasdfjaapz\`"${c2}"       \`dwdsfasdfjaapzx\`     %s"
+			fulloutput=(
+"${c1}       \`dwoapfjsod\`"${c2}"           \`dwoapfjsod\`"
+"${c1}    \`xdwdsfasdfjaapz\`"${c2}"       \`dwdsfasdfjaapzx\`    %s"
 "${c1}  \`wadladfladlafsozmm\`"${c2}"     \`wadladfladlafsozmm\`  %s"
 "${c1} \`aodowpwafjwodisosoaas\`"${c2}" \`odowpwafjwodisosoaaso\` %s"
 "${c1} \`adowofaowiefawodpmmxs\`"${c2}" \`dowofaowiefawodpmmxso\` %s"
@@ -3163,7 +3541,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; c4="${my_lcolor}"; c5="${my_lcolor}"; c6="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("\n${c1}                 -/+:.          %s"
+			fulloutput=(
+"\n${c1}                 -/+:.         %s"
 "${c1}                :++++.         %s"
 "${c1}               /+++/.          %s"
 "${c1}       .:-::- .+/:-\`\`.::-      %s"
@@ -3190,7 +3569,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("${c3}\n                        ..              %s"
+			fulloutput=(
+"${c3}\n                        ..             %s"
 "${c3}                       dWc             %s"
 "${c3}                     ,X0'              %s"
 "${c1}  ;;;;;;;;;;;;;;;;;;${c3}0Mk${c2}::::::::::::::: %s"
@@ -3211,7 +3591,7 @@ asciiText () {
 "${c3}                        o'             %s\n")
 		;;
 
-		"Windows"|"Cygwin")
+		"Windows"|"Cygwin"|"Msys")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'light red') # Red
 				c2=$(getColor 'light green') # Green
@@ -3220,7 +3600,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; c4="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("${c1}        ,.=:!!t3Z3z.,                 %s"
+			fulloutput=(
+"${c1}        ,.=:!!t3Z3z.,                %s"
 "${c1}       :tt:::tt333EE3                %s"
 "${c1}       Et:::ztt33EEEL${c2} @Ee.,      .., %s"
 "${c1}      ;tt:::tt333EE7${c2} ;EEEEEEttttt33# %s"
@@ -3238,10 +3619,43 @@ asciiText () {
 "${c4}                 \"VEzjt:;;z>*\`       %s")
 		;;
 
+		"Windows - Modern")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'light blue') # Blue
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c1}                                  .., %s"
+"${c1}                      ....,,:;+ccllll %s"
+"${c1}        ...,,+:;  cllllllllllllllllll %s"
+"${c1}  ,cclllllllllll  lllllllllllllllllll %s"
+"${c1}  llllllllllllll  lllllllllllllllllll %s"
+"${c1}  llllllllllllll  lllllllllllllllllll %s"
+"${c1}  llllllllllllll  lllllllllllllllllll %s"
+"${c1}  llllllllllllll  lllllllllllllllllll %s"
+"${c1}  llllllllllllll  lllllllllllllllllll %s"
+"${c1}                                      %s"
+"${c1}  llllllllllllll  lllllllllllllllllll %s"
+"${c1}  llllllllllllll  lllllllllllllllllll %s"
+"${c1}  llllllllllllll  lllllllllllllllllll %s"
+"${c1}  llllllllllllll  lllllllllllllllllll %s"
+"${c1}  llllllllllllll  lllllllllllllllllll %s"
+"${c1}  \`'ccllllllllll  lllllllllllllllllll %s"
+"${c1}         \`'\"\"*::  :ccllllllllllllllll %s"
+"${c1}                        \`\`\`\`''\"*::cll %s"
+"${c1}                                   \`\` %s")
+		;;
+
 		"Haiku")
 			if [[ "$no_color" != "1" ]]; then
-				c1=$(getColor 'black_haiku') # Black
-				c2=$(getColor 'light grey') # Light Gray
+				if [ "$haikualpharelease" == "yes" ]; then
+					c1=$(getColor 'black_haiku') # Black
+					c2=$(getColor 'light grey') # Light Gray
+				else
+					c1=$(getColor 'black') # Black
+					c2=${c1}
+				fi
 				c3=$(getColor 'green') # Green
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; fi
@@ -3274,7 +3688,7 @@ asciiText () {
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
 			fulloutput=(
-"${c1}                          ▄▄▄▄▄▄       %s"
+"${c1}                          ▄▄▄▄▄▄      %s"
 "${c1}                       ▄█████████▄    %s"
 "${c1}       ▄▄▄▄▄▄         ████▀   ▀████   %s"
 "${c1}    ▄██████████▄     ████▀   ▄▄ ▀███  %s"
@@ -3301,7 +3715,7 @@ asciiText () {
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="0"
 			fulloutput=(
-"${c1} ██████████████████  ████████     %s"
+"${c1} ██████████████████  ████████    %s"
 "${c1} ██████████████████  ████████    %s"
 "${c1} ██████████████████  ████████    %s"
 "${c1} ██████████████████  ████████    %s"
@@ -3328,32 +3742,32 @@ asciiText () {
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="0"
 			fulloutput=(
-"${c1} nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn    %s"
-"${c1} nnnnnnnnnnnnnn            nnnnnnnnnnnnnn    %s"
-"${c1} nnnnnnnnnn     nnnnnnnnnn     nnnnnnnnnn    %s"
-"${c1} nnnnnnn   nnnnnnnnnnnnnnnnnnnn   nnnnnnn    %s"
-"${c1} nnnn   nnnnnnnnnnnnnnnnnnnnnnnnnn   nnnn    %s"
-"${c1} nnn  nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn  nnn    %s"
-"${c1} nn  nnnnnnnnnnnnnnnnnnnnnn  nnnnnnnn  nn    %s"
-"${c1} n  nnnnnnnnnnnnnnnnn       nnnnnnnnnn  n    %s"
-"${c1} n nnnnnnnnnnn              nnnnnnnnnnn n    %s"
-"${c1} n nnnnnn                  nnnnnnnnnnnn n    %s"
-"${c1} n nnnnnnnnnnn             nnnnnnnnnnnn n    %s"
-"${c1} n nnnnnnnnnnnnn           nnnnnnnnnnnn n    %s"
-"${c1} n nnnnnnnnnnnnnnnn       nnnnnnnnnnnnn n    %s"
-"${c1} n nnnnnnnnnnnnnnnnn      nnnnnnnnnnnnn n    %s"
-"${c1} n nnnnnnnnnnnnnnnnnn    nnnnnnnnnnnn   n    %s"
-"${c1} nn  nnnnnnnnnnnnnnnnn   nnnnnnnnnnnn  nn    %s"
-"${c1} nnn   nnnnnnnnnnnnnnn  nnnnnnnnnnn   nnn    %s"
-"${c1} nnnnn   nnnnnnnnnnnnnn nnnnnnnnn   nnnnn    %s"
-"${c1} nnnnnnn   nnnnnnnnnnnnnnnnnnnn   nnnnnnn    %s"
-"${c1} nnnnnnnnnn     nnnnnnnnnn     nnnnnnnnnn    %s"
-"${c1} nnnnnnnnnnnnnn            nnnnnnnnnnnnnn    %s"
-"${c1} nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn    %s"
+"${c1} nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn  %s"
+"${c1} nnnnnnnnnnnnnn            nnnnnnnnnnnnnn  %s"
+"${c1} nnnnnnnnnn     nnnnnnnnnn     nnnnnnnnnn  %s"
+"${c1} nnnnnnn   nnnnnnnnnnnnnnnnnnnn   nnnnnnn  %s"
+"${c1} nnnn   nnnnnnnnnnnnnnnnnnnnnnnnnn   nnnn  %s"
+"${c1} nnn  nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn  nnn  %s"
+"${c1} nn  nnnnnnnnnnnnnnnnnnnnnn  nnnnnnnn  nn  %s"
+"${c1} n  nnnnnnnnnnnnnnnnn       nnnnnnnnnn  n  %s"
+"${c1} n nnnnnnnnnnn              nnnnnnnnnnn n  %s"
+"${c1} n nnnnnn                  nnnnnnnnnnnn n  %s"
+"${c1} n nnnnnnnnnnn             nnnnnnnnnnnn n  %s"
+"${c1} n nnnnnnnnnnnnn           nnnnnnnnnnnn n  %s"
+"${c1} n nnnnnnnnnnnnnnnn       nnnnnnnnnnnnn n  %s"
+"${c1} n nnnnnnnnnnnnnnnnn      nnnnnnnnnnnnn n  %s"
+"${c1} n nnnnnnnnnnnnnnnnnn    nnnnnnnnnnnn   n  %s"
+"${c1} nn  nnnnnnnnnnnnnnnnn   nnnnnnnnnnnn  nn  %s"
+"${c1} nnn   nnnnnnnnnnnnnnn  nnnnnnnnnnn   nnn  %s"
+"${c1} nnnnn   nnnnnnnnnnnnnn nnnnnnnnn   nnnnn  %s"
+"${c1} nnnnnnn   nnnnnnnnnnnnnnnnnnnn   nnnnnnn  %s"
+"${c1} nnnnnnnnnn     nnnnnnnnnn     nnnnnnnnnn  %s"
+"${c1} nnnnnnnnnnnnnn            nnnnnnnnnnnnnn  %s"
+"${c1} nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn  %s"
 "                                 %s")
 		;;
 
-    		"Logos")
+			"Logos")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'green') # Green
 				c2=$(getColor 'white') # White
@@ -3378,7 +3792,8 @@ asciiText () {
 "$c1    //////               $c2%s"
 "$c1     //                  $c2%s")
 		;;
-		"Manjaro-tree")
+
+			"Manjaro-tree")
 			if [[ "$no_color" != "1" ]]; then
 				c1="\e[1;32m" # Green
 				c2="\e[1;33m" # Yellow
@@ -3386,7 +3801,7 @@ asciiText () {
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
 			fulloutput=(
-"${c1}                         ###      %s"
+"${c1}                         ###     %s"
 "${c1}     ###             ####        %s"
 "${c1}        ###       ####           %s"
 "${c1}         ##### #####             %s"
@@ -3406,8 +3821,6 @@ asciiText () {
 "                                 %s")
 		;;
 
-
-
 		"elementary OS"|"elementary os")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'white') # White
@@ -3415,7 +3828,7 @@ asciiText () {
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="0"
 			fulloutput=(
-"                                     %s"
+"                                    %s"
 "${c1}         eeeeeeeeeeeeeeeee          %s"
 "${c1}      eeeeeeeeeeeeeeeeeeeeeee       %s"
 "${c1}    eeeee  eeeeeeeeeeee   eeeee     %s"
@@ -3435,7 +3848,6 @@ asciiText () {
 "${c1}         eeeeeeeeeeeeeeeee          %s")
 	;;
 
-
 		"Android")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'white') # White
@@ -3443,10 +3855,10 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="2"
-	                fulloutput=(
+			fulloutput=(
 "${c2}       ╲ ▁▂▂▂▁ ╱"
 "${c2}       ▄███████▄ "
-"${c2}      ▄██${c1} ${c2}███${c1} ${c2}██▄        %s"
+"${c2}      ▄██${c1} ${c2}███${c1} ${c2}██▄       %s"
 "${c2}     ▄███████████▄      %s"
 "${c2}  ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄ █▄   %s"
 "${c2}  ██ █████████████ ██   %s"
@@ -3467,8 +3879,9 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="1"
-			fulloutput=("${c1}                  =/;;/-"
-"${c1}                 +:    //                    %s"
+			fulloutput=(
+"${c1}                  =/;;/-"
+"${c1}                 +:    //                   %s"
 "${c1}                /;      /;                  %s"
 "${c1}               -X        H.                 %s"
 "${c1} .//;;;:;;-,   X=        :+   .-;:=;:;#;.   %s"
@@ -3496,38 +3909,9 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="1"
-			fulloutput=("${c1}.............."
-"${c1}            ..,;:ccc,.                           %s"
-"${c1}          ......''';lxO.                        %s"
-"${c1}.....''''..........,:ld;                        %s"
-"${c1}           .';;;:::;,,.x,                       %s"
-"${c1}      ..'''.            0Xxoc:,.  ...           %s"
-"${c1}  ....                ,ONkc;,;cokOdc',.         %s"
-"${c1} .                   OMo           ':"${c2}"dd"${c1}"o.       %s"
-"${c1}                    dMc               :OO;      %s"
-"${c1}                    0M.                 .:o.    %s"
-"${c1}                    ;Wd                         %s"
-"${c1}                     ;XO,                       %s"
-"${c1}                       ,d0Odlc;,..              %s"
-"${c1}                           ..',;:cdOOd::,.      %s"
-"${c1}                                    .:d;.':;.   %s"
-"${c1}                                       'd,  .'  %s"
-"${c1}                                         ;l   ..%s"
-"${c1}                                          .o    %s"
-"${c1}                                            c   %s"
-"${c1}                                            .'"
-"${c1}                                             .")
-		;;
-		
-		"Kali Linux")
-			if [[ "$no_color" != "1" ]]; then
-				c1=$(getColor 'light blue') # White
-				c2=$(getColor 'black') # Light Red
-			fi
-			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
-			startline="1"
-			fulloutput=("${c1}.............."
-"${c1}            ..,;:ccc,.                           %s"
+			fulloutput=(
+"${c1}.............."
+"${c1}            ..,;:ccc,.                          %s"
 "${c1}          ......''';lxO.                        %s"
 "${c1}.....''''..........,:ld;                        %s"
 "${c1}           .';;;:::;,,.x,                       %s"
@@ -3549,14 +3933,46 @@ asciiText () {
 "${c1}                                             .")
 		;;
 
-                "Sabayon")
-                        if [[ "$no_color" != "1" ]]; then
-                                c1=$(getColor 'white') # White
+		"Kali Linux")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'light blue') # White
+				c2=$(getColor 'black') # Light Red
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
+			startline="1"
+			fulloutput=(
+"${c1}.............."
+"${c1}            ..,;:ccc,.                          %s"
+"${c1}          ......''';lxO.                        %s"
+"${c1}.....''''..........,:ld;                        %s"
+"${c1}           .';;;:::;,,.x,                       %s"
+"${c1}      ..'''.            0Xxoc:,.  ...           %s"
+"${c1}  ....                ,ONkc;,;cokOdc',.         %s"
+"${c1} .                   OMo           ':"${c2}"dd"${c1}"o.       %s"
+"${c1}                    dMc               :OO;      %s"
+"${c1}                    0M.                 .:o.    %s"
+"${c1}                    ;Wd                         %s"
+"${c1}                     ;XO,                       %s"
+"${c1}                       ,d0Odlc;,..              %s"
+"${c1}                           ..',;:cdOOd::,.      %s"
+"${c1}                                    .:d;.':;.   %s"
+"${c1}                                       'd,  .'  %s"
+"${c1}                                         ;l   ..%s"
+"${c1}                                          .o    %s"
+"${c1}                                            c   %s"
+"${c1}                                            .'"
+"${c1}                                             .")
+		;;
+
+		"Sabayon")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'white') # White
 				c2=$(getColor 'light blue') # Blue
-                        fi
-                        if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
-                        startline="0"
-                        fulloutput=("${c2}            ...........                %s"
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c2}            ...........               %s"
 "${c2}         ..             ..            %s"
 "${c2}      ..                   ..         %s"
 "${c2}    ..           ${c1}o           ${c2}..       %s"
@@ -3574,48 +3990,47 @@ asciiText () {
 "${c2}     ..                     ..        %s"
 "${c2}        ..               ..           %s"
 "${c2}          ...............             %s")
-                ;;
+		;;
 
-
-                "KaOS")
-	if [[ "$no_color" != "1" ]]; then
-				c1=$(getColor 'light blue') 
-				c2=$(getColor 'light grey') 
-				c3=$(getColor 'red') 
+		"KaOS")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'light blue')
+				c2=$(getColor 'light grey')
+				c3=$(getColor 'red')
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
 			fulloutput=(
-"${c1} ████████ ████████             %s"
-"${c1}   ██████ ██████              %s"
-"${c1}     ████ ████                %s"
-"${c1}        █ █                   %s"
-"${c1}         █                    %s"
-"${c1}         █ ${c2}  ████████ ████████%s"
-"${c1}         █ ${c2}    ██████ ██████  %s"
-"${c1}         █ ${c2}      ████ ████    %s"
-"${c1}         █ ${c2}         █ █       %s"
-"${c1}         █ ${c2}          █        %s"
-"${c1}       ${c3}███████ ███████        %s"
-"${c1}       ${c3}  █████ █████${c2} █        %s"
-"${c1}         █${c3} ███ ███  ${c2} █        %s"
-"${c1}         █  ${c3}  █     ${c2} █        %s"
-"${c1}         █    ${c3}█     ${c2} █        %s"
-"${c1}         █    ${c3}█     ${c2} █        %s")
+"${c1}                     ..            %s"
+"${c1}  .....         ..OSSAAAAAAA..     %s"
+"${c1} .KKKKSS.     .SSAAAAAAAAAAA.      %s"
+"${c1}.KKKKKSO.    .SAAAAAAAAAA...       %s"
+"${c1}KKKKKKS.   .OAAAAAAAA.             %s"
+"${c1}KKKKKKS.  .OAAAAAA.                %s"
+"${c1}KKKKKKS. .SSAA..                   %s"
+"${c1}.KKKKKS..OAAAAAAAAAAAA........     %s"
+"${c1} DKKKKO.=AA=========A===AASSSO..   %s"
+"${c1}  AKKKS.==========AASSSSAAAAAASS.  %s"
+"${c1}  .=KKO..========ASS.....SSSSASSSS.%s"
+"${c1}    .KK.       .ASS..O.. =SSSSAOSS:%s"
+"${c1}     .OK.      .ASSSSSSSO...=A.SSA.%s"
+"${c1}       .K      ..SSSASSSS.. ..SSA. %s"
+"${c1}                 .SSS.AAKAKSSKA.   %s"
+"${c1}                    .SSS....S..    %s")
 		;;
 
-
-                "CentOS")
-                        if [[ "$no_color" != "1" ]]; then
-                                c1=$(getColor 'yellow') # White
-                                c2=$(getColor 'light green') # White
-                                c3=$(getColor 'light blue') # White
-                                c4=$(getColor 'light purple') # White
-                                c5=$(getColor 'white') # White
-                        fi
-                        if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
-                        startline="0"
-                        fulloutput=("${c1}                   ..                    %s"
+		"CentOS")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'yellow') # White
+				c2=$(getColor 'light green') # White
+				c3=$(getColor 'light blue') # White
+				c4=$(getColor 'light purple') # White
+				c5=$(getColor 'white') # White
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c1}                   ..                   %s"
 "${c1}                 .PLTJ.                 %s"
 "${c1}                <><><><>                %s"
 "       ${c2}KKSSV' 4KKK ${c1}LJ${c4} KKKL.'VSSKK       %s"
@@ -3636,14 +4051,14 @@ asciiText () {
 "${c2}                   ''")
 		;;
 
-
 		"Jiyuu Linux")
 			if [[ "$no_color" != "1" ]]; then
 				c1=$(getColor 'light blue') # Light Blue
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("${c1}+++++++++++++++++++++++.        %s"
+			fulloutput=(
+"${c1}+++++++++++++++++++++++.       %s"
 "${c1}ss:-......-+so/:----.os-       %s"
 "${c1}ss        +s/        os-       %s"
 "${c1}ss       :s+         os-       %s"
@@ -3670,8 +4085,9 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 			startline="1"
-			fulloutput=("${c1}               \`.-/::/-\`\`"
-"${c1}            .-/osssssssso/.               %s"
+			fulloutput=(
+"${c1}               \`.-/::/-\`\`"
+"${c1}            .-/osssssssso/.              %s"
 "${c1}           :osyysssssssyyys+-            %s"
 "${c1}        \`.+yyyysssssssssyyyyy+.          %s"
 "${c1}       \`/syyyyyssssssssssyyyyys-\`        %s"
@@ -3699,7 +4115,8 @@ asciiText () {
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("${c2}                 __.;=====;.__                  %s"
+			fulloutput=(
+"${c2}                 __.;=====;.__                 %s"
 "${c2}             _.=+==++=++=+=+===;.              %s"
 "${c2}              -=+++=+===+=+=+++++=_            %s"
 "${c1}         .     "${c2}"-=:\`\`     \`--==+=++==.          %s"
@@ -3721,31 +4138,209 @@ asciiText () {
 
 		"NixOS")
 			if [[ "$no_color" != "1" ]]; then
-				c1=$(getColor 'purple')
+				c1=$(getColor 'blue')
 				c2=$(getColor 'light blue')
 			fi
 			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
 			startline="0"
-			fulloutput=("${c2}                  .:.                   %s"
-"${c2}                  :::                  %s"
-"${c2}          ...     :::      ${c1}.:.         %s"
-"${c2}          ':::::. :::      ${c1}:::         %s"
-"${c1}  ...         ${c2}'::::::      ${c1}:::     ..  %s"
-"${c1}   ::::.       ..${c2}':::::.   ${c1}:::  .::::' %s"
-"${c1}     ''::::..::::''  ${c2}'':::.${c1}::::::''    %s"
-"${c1}       .::::${c2}.${c1}''          ${c2}':${c1}:::'        %s"
-"${c1}    .:::::${c2}:::              ${c1}:::         %s"
-"${c1}  .:::'   ${c2}:::              ${c1}:::  ${c2}..:::  %s"
-"${c1}  ''      ${c2}:::              ${c1}:${c2}.:::::''   %s"
-"${c2}         .:::${c1}:.          ${c2}.:::::'       %s"
-"${c2}     ..::::::${c1}'::::.  ${c2}.:::::''::::..    %s"
-"${c2}   ::::'  :::   ${c1}'::::${c2}':'        ${c2}'::::. %s"
-"${c2}  '''     :::     ${c1}:::::::.         ${c2}''' %s"
-"${c2}          :::     ${c1}:::  ':::::.         %s"
-"${c2}          :::     ${c1}:::      '''         %s"
-"${c2}           '      ${c1}:::                  %s"
-"${c1}                  :::                  %s"
-"${c1}                   '                   %s")
+			fulloutput=(
+"${c1}          ::::.    ${c2}':::::     ::::'          %s"
+"${c1}          ':::::    ${c2}':::::.  ::::'           %s"
+"${c1}            :::::     ${c2}'::::.:::::            %s"
+"${c1}      .......:::::..... ${c2}::::::::             %s"
+"${c1}     ::::::::::::::::::. ${c2}::::::    ${c1}::::.     %s"
+"${c1}    ::::::::::::::::::::: ${c2}:::::.  ${c1}.::::'     %s"
+"${c2}           .....           ::::' ${c1}:::::'      %s"
+"${c2}          :::::            '::' ${c1}:::::'       %s"
+"${c2} ........:::::               ' ${c1}:::::::::::.  %s"
+"${c2}:::::::::::::                 ${c1}:::::::::::::  %s"
+"${c2} ::::::::::: ${c1}..              ${c1}:::::           %s"
+"${c2}     .::::: ${c1}.:::            ${c1}:::::            %s"
+"${c2}    .:::::  ${c1}:::::          ${c1}'''''    ${c2}.....    %s"
+"${c2}    :::::   ${c1}':::::.  ${c2}......:::::::::::::'    %s"
+"${c2}     :::     ${c1}::::::. ${c2}':::::::::::::::::'     %s"
+"${c1}            .:::::::: ${c2}'::::::::::            %s"
+"${c1}           .::::''::::.     ${c2}'::::.           %s"
+"${c1}          .::::'   ::::.     ${c2}'::::.          %s"
+"${c1}         .::::      ::::      ${c2}'::::.         %s")
+		;;
+
+		"BunsenLabs")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'blue')
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="5"
+			fulloutput=(
+"${c1}            HC]"
+"${c1}          H]]]]"
+"${c1}        H]]]]]]4"
+"${c1}      @C]]]]]]]]*"
+"${c1}     @]]]]]]]]]]xd"
+"${c1}    @]]]]]]]]]]]]]d      %s"
+"${c1}   0]]]]]]]]]]]]]]]]     %s"
+"${c1}   kx]]]]]]x]]x]]]]]%%    %s"
+"${c1}  #x]]]]]]]]]]]]]x]]]d   %s"
+"${c1}  #]]]]]]qW  x]]x]]]]]4  %s"
+"${c1}  k]x]]xg     %%x]]]]]]%%  %s"
+"${c1}  Wx]]]W       x]]]]]]]  %s"
+"${c1}  #]]]4         xx]]x]]  %s"
+"${c1}   px]           ]]]]]x  %s"
+"${c1}   Wx]           x]]x]]  %s"
+"${c1}    &x           x]]]]   %s"
+"${c1}     m           x]]]]   %s"
+"${c1}                 x]x]    %s"
+"${c1}                 x]]]    %s"
+"${c1}                ]]]]"
+"${c1}                x]x"
+"${c1}               x]q"
+"${c1}               ]g"
+"${c1}              q")
+		;;
+
+		"SteamOS")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'grey') # Gray
+				c2=$(getColor 'purple') # Dark Purple
+				c3=$(getColor 'light purple') # Light Purple
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c2}               .,,,,.                %s"
+"${c2}         .,'onNMMMMMNNnn',.          %s"
+"${c2}      .'oNM${c3}ANK${c2}MMMMMMMMMMMNNn'.       %s"
+"${c3}    .'ANMMMMMMMXK${c2}NNWWWPFFWNNMNn.     %s"
+"${c3}   ;NNMMMMMMMMMMNWW'' ${c2},.., ${c2}'WMMM,    %s"
+"${c3}  ;NMMMMV+##+VNWWW' ${c3}.+;'':+, ${c3}'WM${c2}W,   %s"
+"${c3} ,VNNWP+${c1}######${c3}+WW,  ${c1}+:    ${c3}:+, ${c3}+MMM,  %s"
+"${c3} '${c1}+#############,   +.    ,+' ${c3}+NMMM  %s"
+"${c1}   '*#########*'     '*,,*' ${c3}.+NMMMM. %s"
+"${c1}      \`'*###*'          ,.,;###${c3}+WNM, %s"
+"${c1}          .,;;,      .;##########${c3}+W  %s"
+"${c1} ,',.         ';  ,+##############'  %s"
+"${c1}  '###+. :,. .,; ,###############'   %s"
+"${c1}   '####.. \`'' .,###############'    %s"
+"${c1}     '#####+++################'      %s"
+"${c1}       '*##################*'        %s"
+"${c1}          ''*##########*''           %s"
+"${c1}               ''''''                ")
+		;;
+
+		"SailfishOS")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'blue') # Blue
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c1}              .+eWWW            %s"
+"${c1}          .+ee+++eee      e.    %s"
+"${c1}       .ee++eeeeeeee    +e.     %s"
+"${c1}     .e++ee++eeeeeee+eee+e+     %s"
+"${c1}    ee.e+.ee+eee++eeeeee+       %s"
+"${c1}   W.+e.e+.e++ee+eee            %s"
+"${c1}  W.+e.W.ee.W++ee'              %s"
+"${c1} +e.W W.e+.W.W+                 %s"
+"${c1} W.e.+e.W W W.                  %s"
+"${c1} e e e +e.W.W                   %s"
+"${c1}       .W W W.                  %s"
+"${c1}        W.+e.W.                 %s"
+"${c1}         W++e.ee+.              %s"
+"${c1}          ++ +ee++eeeee++.      %s"
+"${c1}          '     '+++e   'ee.    %s"
+"${c1}                           ee   %s"
+"${c1}                            ee  %s"
+"${c1}                             e  %s")
+		;;
+
+		"Qubes OS")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'cyan')
+				c2=$(getColor 'blue')
+				c3=$(getColor 'light blue')
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"$c1      $c3                ####                     %s"
+"$c1        $c3            ########                   %s"
+"$c1          $c3        ############                 %s"
+"$c1            $c3    #######  #######               %s"
+"$c1              #$c3######      ######$c2#             %s"
+"$c1            ####$c3###          ###$c2####           %s"
+"$c1          ######        $c2        ######         %s"
+"$c1          ######        $c2        ######         %s"
+"$c1          ######        $c2        ######         %s"
+"$c1          ######        $c2        ######         %s"
+"$c1          ######        $c2        ######         %s"
+"$c1            #######     $c2     #######           %s"
+"$c1              #######   $c2   #########           %s"
+"$c1                ####### $c2 ##############        %s"
+"$c1                  ######$c2######  ######         %s"
+"$c1                    ####$c2####     ###           %s"
+"$c1                      ##$c2##                     %s"
+"$c1                                                  %s")
+		;;
+
+		"PCLinuxOS")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'blue') # Blue
+				c2=$(getColor 'light grey') # White
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"$c1                                                  %s"
+"${c1}                                             <NNN>%s"
+"${c1}                                           <NNY   %s"
+"${c1}                 <ooooo>--.               ((      %s"
+"${c1}               Aoooooooooooo>--.           \\\\\\     %s"
+"${c1}              AooodNNNNNNNNNNNNNNNN>--.     ))    %s"
+"${c1}          "${c2}"("${c1}"  AoodNNNNNNNNNNNNNNNNNNNNNNN>-///'    %s"
+"${c1}          "${c2}"\\\\\\\\"${c1}"AodNNNNNNNNNNNNNNNNNNNNNNNNNNNY/      %s"
+"${c1}           AodNNNNNNNNNNNNNNNNNNNNNNNNNNNNN       %s"
+"${c1}          AdNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNA       %s"
+"${c1}         ("${c2}"/)"${c1}"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNA      %s"
+"${c1}         "${c2}"//"${c1}"<NNNNNNNNNNNNNNNNNY'   YNNY YNNNN      %s"
+"${c1} "${c2}",====#Y//"${c1}"   \`<NNNNNNNNNNNY       ANY     YNA     %s"
+"${c1}               ANY<NNNNYYN       .NY        YN.   %s"
+"${c1}             (NNY       NN      (NND       (NND   %s"
+"${c1}                      (NNU                        %s"
+"${c1}                                                         %s")
+		;;
+
+		"Exherbo")
+			if [[ "$no_color" != "1" ]]; then
+				c1=$(getColor 'dark grey')  # Black
+				c2=$(getColor 'light blue') # Blue
+				c3=$(getColor 'light red')  # Beige
+			fi
+			if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; fi
+			startline="0"
+			fulloutput=(
+"${c1}  ,                                           %s"
+"${c1}  OXo.                                        %s"
+"${c1}  NXdX0:    .cok0KXNNXXK0ko:.                 %s"
+"${c1}  KX  '0XdKMMK;.xMMMk, .0MMMMMXx;  ...        %s"
+"${c1}  'NO..xWkMMx   kMMM    cMMMMMX,NMWOxOXd.     %s"
+"${c1}    cNMk  NK    .oXM.   OMMMMO. 0MMNo  kW.    %s"
+"${c1}    lMc   o:       .,   .oKNk;   ;NMMWlxW'    %s"
+"${c1}   ;Mc    ..   .,,'    .0M${c2}g;${c1}WMN'dWMMMMMMO     %s"
+"${c1}   XX        ,WMMMMW.  cM${c2}cfli${c1}WMKlo.   .kMk    %s"
+"${c1}  .Mo        .WM${c2}GD${c1}MW.   XM${c2}WO0${c1}MMk        oMl   %s"
+"${c1}  ,M:         ,XMMWx::,''oOK0x;          NM.  %s"
+"${c1}  'Ml      ,kNKOxxxxxkkO0XXKOd:.         oMk  %s"
+"${c1}   NK    .0Nxc${c3}:::::::::::::::${c1}fkKNk,      .MW  %s"
+"${c1}   ,Mo  .NXc${c3}::${c1}qXWXb${c3}::::::::::${c1}oo${c3}::${c1}lNK.    .MW  %s"
+"${c1}    ;Wo oMd${c3}:::${c1}oNMNP${c3}::::::::${c1}oWMMMx${c3}:${c1}c0M;   lMO  %s"
+"${c1}     'NO;W0c${c3}:::::::::::::::${c1}dMMMMO${c3}::${c1}lMk  .WM'  %s"
+"${c1}       xWONXdc${c3}::::::::::::::${c1}oOOo${c3}::${c1}lXN. ,WMd   %s"
+"${c1}        'KWWNXXK0Okxxo,${c3}:::::::${c1},lkKNo  xMMO    %s"
+"${c1}          :XMNxl,';:lodxkOO000Oxc. .oWMMo     %s"
+"${c1}            'dXMMXkl;,.        .,o0MMNo'      %s"
+"${c1}               ':d0XWMMMMWNNNNMMMNOl'         %s"
+"${c1}                     ':okKXWNKkl'             %s")
 		;;
 
 		*)
@@ -3757,7 +4352,8 @@ asciiText () {
 				fi
 				if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; c2="${my_lcolor}"; c3="${my_lcolor}"; fi
 				startline="0"
-				fulloutput=("                             %s"
+				fulloutput=(
+"                            %s"
 "                            %s"
 "                            %s"
 "$c2         #####$c0              %s"
@@ -3779,7 +4375,7 @@ asciiText () {
 			elif [[ "$(echo "${kernel}" | grep 'GNU' )" || "$(echo "${kernel}" | grep 'Hurd' )" || "${OSTYPE}" == "gnu" ]]; then
 				startline="0"
 				fulloutput=(
-"    _-\`\`\`\`\`-,           ,- '- .       %s"
+"    _-\`\`\`\`\`-,           ,- '- .      %s"
 "   .'   .- - |          | - -.  \`.   %s"
 "  /.'  /                     \`.   \\  %s"
 " :/   :      _...   ..._      \`\`   : %s"
@@ -3810,8 +4406,9 @@ asciiText () {
 				fi
 				if [ -n "${my_lcolor}" ]; then c1="${my_lcolor}"; fi
 				startline="0"
-				fulloutput=("                                             %s"
-   "                                            %s"
+				fulloutput=(
+"                                            %s"
+"                                            %s"
 "$c1 UUU     UUU NNN      NNN IIIII XXX     XXXX%s"
 "$c1 UUU     UUU NNNN     NNN  III    XX   xXX  %s"
 "$c1 UUU     UUU NNNNN    NNN  III     XX xXX   %s"
@@ -3821,12 +4418,12 @@ asciiText () {
 "$c1 UUU     UUU NNN    NNNNN  III    xXX  XX   %s"
 "$c1  UUUuuuUUU  NNN     NNNN  III   xXX    XX  %s"
 "$c1    UUUUU    NNN      NNN IIIII xXXx    xXXx%s"
-   "                                            %s"
-   "                                            %s"
-   "                                            %s"
-   "                                            %s")
+"                                            %s"
+"                                            %s"
+"                                            %s"
+"                                            %s")
 			fi
-  		;;
+		;;
 	esac
 
 
@@ -3888,18 +4485,18 @@ asciiText () {
 			printf "${fulloutput[$i]}$c0\n"
 		done
 
-        	printf "\n"
+		printf "\n"
 
 		for ((i=0; $i<${#fulloutput[*]}; i++)); do
 			[[ -z "$out_array" ]] && continue
 			printf "%s\n" "${out_array}"
-            		unset out_array[0]
+			unset out_array[0]
 			out_array=( "${out_array[@]}" )
 		done
 
 	elif [[ "$display_logo" == "Yes" ]]; then
 		for ((i=0; i<${#fulloutput[*]}; i++)); do
-			printf "${fulloutput[i]}\n"
+			printf "${fulloutput[i]}$c0\n"
 		done
 
 	else
@@ -3939,13 +4536,14 @@ infoDisplay () {
 	myascii="${distro}"
 	[[ "${asc_distro}" ]] && myascii="${asc_distro}"
 	case ${myascii} in
-		"Arch Linux - Old"|"Fedora"|"Korora"|"Chapeau"|"Mandriva"|"Mandrake"|"Chakra"|"ChromeOS"|"Sabayon"|"Slackware"|"Mac OS X"|"Trisquel"|"Kali Linux"|"Jiyuu Linux"|"Antergos"|"KaOS"|"Logos"|"gNewSense"|"NixOS") labelcolor=$(getColor 'light blue');;
+		"Alpine Linux"|"Arch Linux - Old"|"Fedora"|"Korora"|"Chapeau"|"Mandriva"|"Mandrake"|"Chakra"|"ChromeOS"|"Sabayon"|"Slackware"|"Mac OS X"|"Trisquel"|"Kali Linux"|"Jiyuu Linux"|"Antergos"|"KaOS"|"Logos"|"gNewSense"|"Netrunner"|"NixOS"|"SailfishOS"|"Qubes OS"|"Kogaion"|"PCLinuxOS") labelcolor=$(getColor 'light blue');;
 		"Arch Linux"|"Frugalware"|"Mageia"|"Deepin"|"CRUX") labelcolor=$(getColor 'light cyan');;
-		"Mint"|"LMDE"|"openSUSE"|"LinuxDeepin"|"DragonflyBSD"|"Manjaro"|"Manjaro-tree"|"Netrunner"|"Android"|"Void") labelcolor=$(getColor 'light green');;
-		"Ubuntu"|"FreeBSD"|"FreeBSD - Old"|"Debian"|"Raspbian"|"BSD"|"Red Hat Enterprise Linux"|"Peppermint"|"Cygwin"|"Fuduntu"|"NetBSD"|"Scientific Linux"|"DragonFlyBSD"|"BackTrack Linux") labelcolor=$(getColor 'light red');;
+		"Mint"|"LMDE"|"KDE neon"|"openSUSE"|"SUSE Linux Enterprise"|"LinuxDeepin"|"DragonflyBSD"|"Manjaro"|"Manjaro-tree"|"Android"|"Void") labelcolor=$(getColor 'light green');;
+		"Ubuntu"|"FreeBSD"|"FreeBSD - Old"|"Debian"|"Raspbian"|"BSD"|"Red Hat Enterprise Linux"|"Oracle Linux"|"Peppermint"|"Cygwin"|"Msys"|"Fuduntu"|"Scientific Linux"|"DragonFlyBSD"|"BackTrack Linux"|"Red Star OS") labelcolor=$(getColor 'light red');;
 		"CrunchBang"|"Solus"|"Viperr"|"elementary"*) labelcolor=$(getColor 'dark grey');;
-		"Gentoo"|"Parabola GNU/Linux-libre"|"Funtoo"|"Funtoo-text"|"BLAG") labelcolor=$(getColor 'light purple');;
+		"Gentoo"|"Parabola GNU/Linux-libre"|"Funtoo"|"Funtoo-text"|"BLAG"|"SteamOS") labelcolor=$(getColor 'light purple');;
 		"Haiku") labelcolor=$(getColor 'green');;
+		"NetBSD") labelcolor=$(getColor 'orange');;
 		"CentOS"|*) labelcolor=$(getColor 'yellow');;
 	esac
 	[[ "$my_lcolor" ]] && labelcolor="${my_lcolor}"
@@ -3958,7 +4556,7 @@ infoDisplay () {
 	# Info Variable Setting #
 	#########################
 	if [[ "${distro}" == "Android" ]]; then
-		myhostname=$(echo -e "${labelcolor}${hostname}"); out_array=( "${out_array[@]}" "$myhostname" )
+		myhostname=$(echo -e "${labelcolor} ${hostname}"); out_array=( "${out_array[@]}" "$myhostname" )
 		mydistro=$(echo -e "$labelcolor OS:$textcolor $distro $distro_ver"); out_array=( "${out_array[@]}" "$mydistro" )
 		mydevice=$(echo -e "$labelcolor Device:$textcolor $device"); out_array=( "${out_array[@]}" "$mydevice" )
 		myrom=$(echo -e "$labelcolor ROM:$textcolor $rom"); out_array=( "${out_array[@]}" "$myrom" )
@@ -3969,18 +4567,20 @@ infoDisplay () {
 		mygpu=$(echo -e "$labelcolor GPU:$textcolor $cpu"); out_array=( "${out_array[@]}" "$mygpu" )
 		mymem=$(echo -e "$labelcolor RAM:$textcolor $mem"); out_array=( "${out_array[@]}" "$mymem" )
 	else
-		if [[ "${display[@]}" =~ "host" ]]; then myinfo=$(echo -e "${labelcolor}${myUser}$textcolor${bold}@${c0}${labelcolor}${myHost}"); out_array=( "${out_array[@]}" "$myinfo" ); ((display_index++)); fi
+		if [[ "${display[@]}" =~ "host" ]]; then myinfo=$(echo -e "${labelcolor} ${myUser}$textcolor${bold}@${c0}${labelcolor}${myHost}"); out_array=( "${out_array[@]}" "$myinfo" ); ((display_index++)); fi
 		if [[ "${display[@]}" =~ "distro" ]]; then
 			if [ "$distro" == "Mac OS X" ]; then
-				sysArch=`str1=$(ioreg -l -p IODeviceTree | grep firmware-abi);echo ${str1: -4: 2}bit`
+				sysArch=`str1=$(getconf LONG_BIT);echo ${str1}bit`
 				prodVers=`prodVers=$(sw_vers|grep ProductVersion);echo ${prodVers:15}`
 				buildVers=`buildVers=$(sw_vers|grep BuildVersion);echo ${buildVers:14}`
 				if [ -n "$distro_more" ]; then mydistro=$(echo -e "$labelcolor OS:$textcolor $distro_more $sysArch")
 				else mydistro=$(echo -e "$labelcolor OS:$textcolor $sysArch $distro $prodVers $buildVers"); fi
-			elif [[ "$distro" == "Cygwin" ]]; then
-				distro=$(wmic os get name | head -2 | tail -1)
-				distro=$(expr match "$distro" '\(Microsoft Windows [A-Za-z0-9.]\+\)')
-				sysArch=$(wmic os get OSArchitecture | head -2 | tail -1 | tr -d '\r ')
+			elif [[ "$distro" == "Cygwin" || "$distro" == "Msys" ]]; then
+				distro="$(wmic os get caption | sed 's/\r//g; s/[ \t]*$//g; 2!d')"
+				if [[ "$(wmic os get version | grep -o '^10\.')" == "10." ]]; then
+					distro="$distro (v$(wmic os get version | grep '^10\.' | tr -d ' '))"
+				fi
+				sysArch=$(wmic os get OSArchitecture | sed 's/\r//g; s/[ \t]*$//g; 2!d')
 				mydistro=$(echo -e "$labelcolor OS:$textcolor $distro $sysArch")
 			else
 				if [ -n "$distro_more" ]; then mydistro=$(echo -e "$labelcolor OS:$textcolor $distro_more")
@@ -4012,24 +4612,24 @@ infoDisplay () {
 			if [[ "${display[@]}" =~ "gtk" ]]; then
 				if [ "$distro" == "Mac OS X" ]; then
 					if [[ "$gtkFont" != "Not Applicable" && "$gtkFont" != "Not Found" ]]; then
-						if [ -n "$gtkFont" ]; then 
+						if [ -n "$gtkFont" ]; then
 							myfont=$(echo -e "$labelcolor Font:$textcolor $gtkFont"); out_array=( "${out_array[@]}" "$myfont" ); ((display_index++))
 						fi
 					fi
 				else
 					if [[ "$gtk2Theme" != "Not Applicable" && "$gtk2Theme" != "Not Found" ]]; then
-						if [ -n "$gtk2Theme" ]; then 
+						if [ -n "$gtk2Theme" ]; then
 							mygtk2="${gtk2Theme} [GTK2]"
 						fi
 					fi
 					if [[ "$gtk3Theme" != "Not Applicable" && "$gtk3Theme" != "Not Found" ]]; then
-						if [ -n "$mygtk2" ]; then 
+						if [ -n "$mygtk2" ]; then
 							mygtk3=", ${gtk3Theme} [GTK3]"
 						else
 							mygtk3="${gtk3Theme} [GTK3]"
 						fi
 					fi
-					if [[ "$gtk_2line" == "yes" ]]; then 
+					if [[ "$gtk_2line" == "yes" ]]; then
 						mygtk2=$(echo -e "$labelcolor GTK2 Theme:$textcolor $gtk2Theme"); out_array=( "${out_array[@]}" "$mygtk2" ); ((display_index++))
 						mygtk3=$(echo -e "$labelcolor GTK3 Theme:$textcolor $gtk3Theme"); out_array=( "${out_array[@]}" "$mygtk3" ); ((display_index++))
 					else
@@ -4042,19 +4642,19 @@ infoDisplay () {
 						fi
 					fi
 					if [[ "$gtkIcons" != "Not Applicable" && "$gtkIcons" != "Not Found" ]]; then
-						if [ -n "$gtkIcons" ]; then 
+						if [ -n "$gtkIcons" ]; then
 							myicons=$(echo -e "$labelcolor Icon Theme:$textcolor $gtkIcons"); out_array=( "${out_array[@]}" "$myicons" ); ((display_index++))
 						fi
 					fi
 					if [[ "$gtkFont" != "Not Applicable" && "$gtkFont" != "Not Found" ]]; then
-						if [ -n "$gtkFont" ]; then 
+						if [ -n "$gtkFont" ]; then
 							myfont=$(echo -e "$labelcolor Font:$textcolor $gtkFont"); out_array=( "${out_array[@]}" "$myfont" ); ((display_index++))
 						fi
 					fi
 					# [ "$gtkBackground" ] && mybg=$(echo -e "$labelcolor BG:$textcolor $gtkBackground"); out_array=( "${out_array[@]}" "$mybg" ); ((display_index++))
 				fi
 			fi
-		elif [[ "$fake_distro" == "Cygwin" ]]; then
+		elif [[ "$fake_distro" == "Cygwin" || "$fake_distro" == "Msys" || "$fake_distro" == "Windows - Modern" ]]; then
 			if [[ "${display[@]}" =~ "res" && -n "$xResolution" ]]; then myres=$(echo -e "$labelcolor Resolution:${textcolor} $xResolution"); out_array=( "${out_array[@]}" "$myres" ); ((display_index++)); fi
 			if [[ "${display[@]}" =~ "de" ]]; then
 				if [[ "${DE}" != "Not Present" ]]; then
@@ -4069,8 +4669,12 @@ infoDisplay () {
 					mywmtheme=$(echo -e "$labelcolor WM Theme:$textcolor $Win_theme"); out_array=( "${out_array[@]}" "$mywmtheme" ); ((display_index++))
 				fi
 			fi
+		elif [[ "$distro" == "Haiku" ]]; then
+			if [ -n "${xResolution}" ]; then
+				if [[ "${display[@]}" =~ "res" ]]; then myres=$(echo -e "$labelcolor Resolution:${textcolor} $xResolution"); out_array=( "${out_array[@]}" "$myres" ); ((display_index++)); fi
+			fi
 		fi
-		[[ "${fake_distro}" != "Cygwin" ]] && if [[ "${display[@]}" =~ "disk" ]]; then mydisk=$(echo -e "$labelcolor Disk:$textcolor $diskusage"); out_array=( "${out_array[@]}" "$mydisk" ); ((display_index++)); fi
+		[[ "${fake_distro}" != "Cygwin" && "${fake_distro}" != "Msys" && "${fake_distro}" != "Windows - Modern" ]] && if [[ "${display[@]}" =~ "disk" ]]; then mydisk=$(echo -e "$labelcolor Disk:$textcolor $diskusage"); out_array=( "${out_array[@]}" "$mydisk" ); ((display_index++)); fi
 		if [[ "${display[@]}" =~ "cpu" ]]; then mycpu=$(echo -e "$labelcolor CPU:$textcolor $cpu"); out_array=( "${out_array[@]}" "$mycpu" ); ((display_index++)); fi
 		if [[ "${display[@]}" =~ "gpu" ]] && [[ "$gpu" != "Not Found" ]]; then mygpu=$(echo -e "$labelcolor GPU:$textcolor $gpu"); out_array=( "${out_array[@]}" "$mygpu" ); ((display_index++)); fi
 		if [[ "${display[@]}" =~ "mem" ]]; then mymem=$(echo -e "$labelcolor RAM:$textcolor $mem"); out_array=( "${out_array[@]}" "$mymem" ); ((display_index++)); fi
@@ -4078,7 +4682,7 @@ infoDisplay () {
 	if [[ "$display_type" == "ASCII" ]]; then
 		asciiText
 	else
-		if [[ "${display[@]}" =~ "host" ]]; then echo -e " $myinfo"; fi
+		if [[ "${display[@]}" =~ "host" ]]; then echo -e "$myinfo"; fi
 		if [[ "${display[@]}" =~ "distro" ]]; then echo -e "$mydistro"; fi
 		if [[ "${display[@]}" =~ "kernel" ]]; then echo -e "$mykernel"; fi
 		if [[ "${distro}" == "Android" ]]; then
@@ -4091,23 +4695,29 @@ infoDisplay () {
 			echo -e "$mymem"
 		else
 			if [[ "${display[@]}" =~ "uptime" ]]; then echo -e "$myuptime"; fi
-			if [[ "${display[@]}" =~ "pkgs" ]]; then echo -e "$mypkgs"; fi
+			if [[ "${display[@]}" =~ "pkgs" && "$mypkgs" != "Unknown" ]]; then echo -e "$mypkgs"; fi
 			if [[ "${display[@]}" =~ "shell" ]]; then echo -e "$myshell"; fi
-			if [[ "${display[@]}" =~ "res" ]]; then echo -e "$myres"; fi
+			if [[ "${display[@]}" =~ "res" ]]; then
+				test -z "$myres" || echo -e "$myres"
+			fi
 			if [[ "${display[@]}" =~ "de" ]]; then
 				if [[ "${DE}" != "Not Present" ]]; then echo -e "$myde"; fi
 			fi
 			if [[ "${display[@]}" =~ "wm" ]]; then
-				echo -e "$mywm"
+				test -z "$mywm" || echo -e "$mywm"
 				if [[ "${Win_theme}" != "Not Applicable" && "${Win_theme}" != "Not Found" ]]; then
-					echo -e "$mywmtheme"
+					test -z "$mywmtheme" || echo -e "$mywmtheme"
 				fi
 			fi
 			if [[ "${display[@]}" =~ "gtk" ]]; then
-				echo -e "$mygtk2"
-				echo -e "$mygtk3"
-				echo -e "$myicons"
-				echo -e "$myfont"
+				if [[ "$gtk_2line" == "yes" ]]; then
+					test -z "$mygtk2" || echo -e "$mygtk2"
+					test -z "$mygtk3" || echo -e "$mygtk3"
+				else
+					test -z "$mygtk" || echo -e "$mygtk"
+				fi
+				test -z "$myicons" || echo -e "$myicons"
+				test -z "$myfont" || echo -e "$myfont"
 			fi
 			if [[ "${display[@]}" =~ "disk" ]]; then echo -e "$mydisk"; fi
 			if [[ "${display[@]}" =~ "cpu" ]]; then echo -e "$mycpu"; fi
@@ -4122,7 +4732,7 @@ infoDisplay () {
 ##################
 
 if [[ -f "$HOME/.screenfetchOR" ]]; then
-    source $HOME/.screenfetchOR
+	source $HOME/.screenfetchOR
 fi
 
 
@@ -4146,20 +4756,20 @@ if [[ "$overrideDisplay" ]]; then
 			IFS=$_OLDIFS
 		elif [[ "${modchar}" == "+" ]]; then
 			i=${i/${modchar}}
-		        _OLDIFS=IFS
-		        IFS=,
-		        for n in $i; do
+			_OLDIFS=IFS
+			IFS=,
+			for n in $i; do
 				if [[ "${valid_display[@]}" =~ "$n" ]]; then
 					if [[ "${display[@]}" =~ "$n" ]]; then
 						echo "The $n var is already being displayed."
 					else
-			        	        display+=($n)
+						display+=($n)
 					fi
 				else
 					echo "The var $n is not a valid display var."
 				fi
-		        done
-		        IFS=$_OLDIFS
+			done
+			IFS=$_OLDIFS
 		else
 			IFS=$OLDIFS
 			i="${i//,/ }"
@@ -4186,9 +4796,9 @@ for i in "${display[@]}"; do
 			 ! [[ $WM  ]] && detectwm;
 			 ! [[ $Win_theme ]] && detectwmtheme;
 		else
-			if [[ "${display[*]}" =~ "$i" ]]; then 
+			if [[ "${display[*]}" =~ "$i" ]]; then
 				if [[ "$errorSuppress" == "1" ]]; then detect${i} 2>/dev/null
-				else 
+				else
 					exec 3> >(stderrOut)
 					detect${i} 2>&3
 					exec 3>&-
