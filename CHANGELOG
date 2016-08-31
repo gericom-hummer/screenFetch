@@ -3,7 +3,7 @@
     changelog
 **** **** **** ****
 
-v3.8.0
+v3.8.2
 	- Fix issue with extra space and host variable
 	- Improvements to OS X font detection
 	- Fixed package count, shell detection and colors on NetBSD
